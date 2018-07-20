@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VatHTKK", "VatHTKK\VatHTKK.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CusPiriou", "CusPiriou\CusPiriou.csproj", "{22D0E7EB-8DF0-4BD6-A1EC-BD3A4A024093}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDT", "..\CDT\CDT.csproj", "{A48C0424-B640-40F9-9F72-9D96667B6160}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDT", "..\CDT\CDT\CDT.csproj", "{A48C0424-B640-40F9-9F72-9D96667B6160}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
