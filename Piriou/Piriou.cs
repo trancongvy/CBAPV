@@ -37,6 +37,16 @@ namespace Piriou
                     frm1.Text = si.MenuName;
                     //frm.ShowDialog();
                     return frm1;
+                case 9003:
+                    ChkStock frm2 = new ChkStock();
+                    frm2.Text = si.MenuName;
+                    //frm.ShowDialog();
+                    return frm2;
+                case 9004:
+                    fPurchaser frm3 = new fPurchaser();
+                    frm3.Text = si.MenuName;
+                    //frm.ShowDialog();
+                    return frm3;
             }
             return f;
         }
