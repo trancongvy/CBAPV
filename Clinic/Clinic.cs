@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Plugins;
 using System.Windows.Forms;
-
-namespace Piriou
+namespace Clinic
 {
-    public class Piriou:ICustom
+    public class Clinic:ICustom 
     {
         private List<StructInfo> _listStructInfo;
         public Form Execute(int menuId)
@@ -20,6 +21,7 @@ namespace Piriou
                 }
             }
             return f;
+            //Thuwr commit
         }
 
         private Form ExecuteFunctions(StructInfo si)
@@ -27,31 +29,12 @@ namespace Piriou
             Form f = new Form();
             switch (si.MenuId)
             {
-                case 9001:
-                    fViewSumRFM frm = new fViewSumRFM();
+                case 7001:
+                    fBocso frm = new fBocso();
                     frm.Text = si.MenuName;
                     //frm.ShowDialog();
                     return frm;
-                case 9002:
-                    fCreateRequest frm1 = new fCreateRequest();
-                    frm1.Text = si.MenuName;
-                    //frm.ShowDialog();
-                    return frm1;
-                case 9003:
-                    ChkStock frm2 = new ChkStock();
-                    frm2.Text = si.MenuName;
-                    //frm.ShowDialog();
-                    return frm2;
-                case 9004:
-                    fProvider frm3 = new fProvider();
-                    frm3.Text = si.MenuName;
-                    //frm.ShowDialog();
-                    return frm3;
-                case 9005:
-                    fPOMuber frm4 = new fPOMuber();
-                    frm4.Text = si.MenuName;
-                    //frm.ShowDialog();
-                    return frm4;
+                
             }
             return f;
         }
@@ -60,7 +43,7 @@ namespace Piriou
         {
             get
             {
-                return _listStructInfo; 
+                return _listStructInfo;
             }
             set
             {

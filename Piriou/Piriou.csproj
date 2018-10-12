@@ -140,11 +140,17 @@
     <Compile Include="fCreateRequest.Designer.cs">
       <DependentUpon>fCreateRequest.cs</DependentUpon>
     </Compile>
-    <Compile Include="fPurchaser.cs">
+    <Compile Include="fPONumber.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fPurchaser.Designer.cs">
-      <DependentUpon>fPurchaser.cs</DependentUpon>
+    <Compile Include="fPONumber.Designer.cs">
+      <DependentUpon>fPONumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fProvider.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fProvider.Designer.cs">
+      <DependentUpon>fProvider.cs</DependentUpon>
     </Compile>
     <Compile Include="fViewSumRFM.cs">
       <SubType>Form</SubType>
@@ -162,8 +168,11 @@
     <EmbeddedResource Include="fCreateRequest.resx">
       <DependentUpon>fCreateRequest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fPurchaser.resx">
-      <DependentUpon>fPurchaser.cs</DependentUpon>
+    <EmbeddedResource Include="fPONumber.resx">
+      <DependentUpon>fPONumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fProvider.resx">
+      <DependentUpon>fProvider.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fViewSumRFM.resx">
       <DependentUpon>fViewSumRFM.cs</DependentUpon>

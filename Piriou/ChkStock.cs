@@ -12,6 +12,7 @@ using CDTDatabase;
 using FormFactory;
 using CDTLib;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 namespace Piriou
 {
     public partial class ChkStock : XtraForm
@@ -35,6 +36,7 @@ namespace Piriou
             gridLookUpEdit1.Properties.ValueMember = "MaKH";
             gridLookUpEdit1.Properties.DisplayMember = "TenKH";
             gridLookUpEdit1.EditValue = Config.GetValue("FullName");
+            
         }
 
         private void tbGet_Click(object sender, EventArgs e)
@@ -44,13 +46,29 @@ namespace Piriou
             tb = db.GetDataSetByStore("GetCheckStock", new string[] { }, new object[] { });
             if (tb == null) return;
             tb.ColumnChanged += Tb_ColumnChanged;
+            tb.ColumnChanging += tb_ColumnChanging;
             gridControl1.DataSource = tb;
+        }
+
+        void tb_ColumnChanging(object sender, DataColumnChangeEventArgs e)
+        {
+            if (e.Column.ColumnName == "bookstock" && e.ProposedValue != DBNull.Value)
+            {
+                 if (double.Parse(e.Row["soluong"].ToString()) < double.Parse(e.ProposedValue.ToString()))
+                {
+                    if (e.Row["bookstock"] != DBNull.Value)
+                    {
+                        e.ProposedValue = double.Parse(e.Row["bookstock"].ToString());
+                    }
+                }
+            }
         }
 
         private void Tb_ColumnChanged(object sender, DataColumnChangeEventArgs e)
         {
-            if(e.Column.ColumnName== "bookstock")
+            if(e.Column.ColumnName== "bookstock" && e.Row["bookstock"]!=DBNull.Value)
             {
+
                 e.Row["slcan"] = double.Parse(e.Row["soluong"].ToString()) - double.Parse(e.Row["bookstock"].ToString());
                 if (double.Parse(e.Row["slcan"].ToString()) < 0) e.Row["slcan"] = 0;
                 e.Row.EndEdit();
@@ -105,7 +123,9 @@ namespace Piriou
                 foreach (DataRow dr in tb.Rows)
                 {
                     if (dr["bookstock"] == DBNull.Value) continue;
-                    string upsql = "update dt29 set daCheck=1, bookstock=" + double.Parse(dr["bookstock"].ToString()).ToString("###########0.##") + ", slcan=" + double.Parse(dr["slcan"].ToString()).ToString("###########0.##");
+                    string upsql = "update dt29 set daCheck=1, bookstock=" + double.Parse(dr["bookstock"].ToString()).ToString("###########0.##") + ", slcan=" + double.Parse(dr["slcan"].ToString()).ToString("###########0.##") ;
+                    if (dr["mavt1"] != DBNull.Value) upsql += ", mavt1='" + dr["mavt1"].ToString() + "'";
+                    if (dr["mrchange"] != DBNull.Value) upsql += ", MrChange='" + dr["mrchange"].ToString() + "'";
                     upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
                     db.UpdateByNonQuery(upsql);
                     if (db.HasErrors)
@@ -128,6 +148,11 @@ namespace Piriou
                 else db.RollbackMultiTrans();
             }
             tbGet_Click(sender, e);
+        }
+
+        private void panelControl1_Paint(object sender, PaintEventArgs e)
+        {
+            
         }
     }
 }

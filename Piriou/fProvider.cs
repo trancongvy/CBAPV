@@ -13,9 +13,9 @@ using CDTLib;
 using DevExpress.XtraGrid;
 namespace Piriou
 {
-    public partial class fPurchaser : Form
+    public partial class fProvider : Form
     {
-        public fPurchaser()
+        public fProvider()
         {
             InitializeComponent();
         }
@@ -41,7 +41,7 @@ namespace Piriou
         private void tbGet_Click(object sender, EventArgs e)
         {
             if (gridLookUpEdit1.EditValue == null) return;
-            tb = db.GetDataSetByStore("GetPurchaser", new string[] {"@puric" }, new object[] { gridLookUpEdit1.EditValue.ToString()});
+            tb = db.GetDataSetByStore("GetProvider", new string[] {"@puric" }, new object[] { gridLookUpEdit1.EditValue.ToString()});
             if (tb == null) return;
             gridControl1.DataSource = tb;
         }
@@ -58,17 +58,7 @@ namespace Piriou
             }
         }
 
-        private void simpleButton3_Click(object sender, EventArgs e)
-        {
-            if (tPONo.Text == string.Empty) return;
-            int[] i = gridView1.GetSelectedRows();
-            foreach (int j in i)
-            {
-                DataRow dr = gridView1.GetDataRow(j);
-                dr["PoNo"] = tPONo.Text;
-                dr.EndEdit();
-            }
-        }
+
 
         private void btUpdate_Click(object sender, EventArgs e)
         {
@@ -78,9 +68,10 @@ namespace Piriou
             {
                 foreach (DataRow dr in tb.Rows)
                 {
-                    if (dr["Provider"] == DBNull.Value || dr["PoNo"] == DBNull.Value) continue;
-                    string upsql = "update dt29 set  Provider='" + dr["Provider"].ToString() + "', PoNo='" + dr["PoNo"].ToString();
-                    upsql += "' where dt29id='" + dr["DT29ID"].ToString() + "'";
+                    if (dr["Provider"] == DBNull.Value ) continue;
+                    string upsql = "update dt29 set ";                    
+                    upsql += " Provider='" + dr["Provider"].ToString() + "'";
+                    upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
                     db.UpdateByNonQuery(upsql);
                     if (db.HasErrors)
                     {

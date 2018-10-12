@@ -1,6 +1,6 @@
 ﻿namespace Piriou
 {
-    partial class fPurchaser
+    partial class fProvider
     {
         /// <summary>
         /// Required designer variable.
@@ -31,16 +31,13 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.btUpdate = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.tProvider = new DevExpress.XtraEditors.TextEdit();
             this.tbGet = new DevExpress.XtraEditors.SimpleButton();
             this.gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.tProvider = new DevExpress.XtraEditors.TextEdit();
-            this.tPONo = new DevExpress.XtraEditors.TextEdit();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,19 +46,19 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemCalcEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCalcEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tProvider.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tProvider.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tPONo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCalcEdit1)).BeginInit();
@@ -88,11 +85,8 @@
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.labelControl3);
-            this.panelControl1.Controls.Add(this.labelControl2);
             this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Controls.Add(this.simpleButton3);
             this.panelControl1.Controls.Add(this.simpleButton2);
-            this.panelControl1.Controls.Add(this.tPONo);
             this.panelControl1.Controls.Add(this.tProvider);
             this.panelControl1.Controls.Add(this.tbGet);
             this.panelControl1.Controls.Add(this.gridLookUpEdit1);
@@ -101,6 +95,38 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1168, 58);
             this.panelControl1.TabIndex = 2;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(49, 8);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(52, 13);
+            this.labelControl3.TabIndex = 9;
+            this.labelControl3.Text = "Purchaser:";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(49, 36);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(44, 13);
+            this.labelControl1.TabIndex = 7;
+            this.labelControl1.Text = "Provider:";
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Location = new System.Drawing.Point(268, 30);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(92, 23);
+            this.simpleButton2.TabIndex = 5;
+            this.simpleButton2.Text = "Add to selected";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // tProvider
+            // 
+            this.tProvider.Location = new System.Drawing.Point(123, 32);
+            this.tProvider.Name = "tProvider";
+            this.tProvider.Size = new System.Drawing.Size(139, 20);
+            this.tProvider.TabIndex = 3;
             // 
             // tbGet
             // 
@@ -128,62 +154,6 @@
             this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
             this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // tProvider
-            // 
-            this.tProvider.Location = new System.Drawing.Point(123, 32);
-            this.tProvider.Name = "tProvider";
-            this.tProvider.Size = new System.Drawing.Size(139, 20);
-            this.tProvider.TabIndex = 3;
-            // 
-            // tPONo
-            // 
-            this.tPONo.Location = new System.Drawing.Point(445, 33);
-            this.tPONo.Name = "tPONo";
-            this.tPONo.Size = new System.Drawing.Size(114, 20);
-            this.tPONo.TabIndex = 4;
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Location = new System.Drawing.Point(268, 30);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(92, 23);
-            this.simpleButton2.TabIndex = 5;
-            this.simpleButton2.Text = "Add to selected";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Location = new System.Drawing.Point(565, 30);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(92, 23);
-            this.simpleButton3.TabIndex = 6;
-            this.simpleButton3.Text = "Add to selected";
-            this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(49, 36);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(44, 13);
-            this.labelControl1.TabIndex = 7;
-            this.labelControl1.Text = "Provider:";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(385, 35);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(53, 13);
-            this.labelControl2.TabIndex = 8;
-            this.labelControl2.Text = "PO number";
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(49, 8);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(52, 13);
-            this.labelControl3.TabIndex = 9;
-            this.labelControl3.Text = "Purchaser:";
             // 
             // gridControl1
             // 
@@ -213,6 +183,7 @@
             this.gridColumn6,
             this.gridColumn10,
             this.gridColumn11,
+            this.gridColumn9,
             this.gridColumn7,
             this.gridColumn8});
             this.gridView1.CustomizationFormBounds = new System.Drawing.Rectangle(1007, 450, 216, 183);
@@ -220,6 +191,8 @@
             this.gridView1.GroupFormat = " {1} {2}";
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            this.gridView1.OptionsView.EnableAppearanceOddRow = true;
             this.gridView1.OptionsView.ShowAutoFilterRow = true;
             this.gridView1.OptionsView.ShowGroupedColumns = true;
             // 
@@ -283,18 +256,6 @@
             this.gridColumn6.VisibleIndex = 4;
             this.gridColumn6.Width = 219;
             // 
-            // repositoryItemCalcEdit1
-            // 
-            this.repositoryItemCalcEdit1.AutoHeight = false;
-            this.repositoryItemCalcEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemCalcEdit1.DisplayFormat.FormatString = "### ### ##0.##";
-            this.repositoryItemCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.repositoryItemCalcEdit1.EditFormat.FormatString = "### ### ##0.##";
-            this.repositoryItemCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.repositoryItemCalcEdit1.Mask.EditMask = "### ### ##0.##";
-            this.repositoryItemCalcEdit1.Name = "repositoryItemCalcEdit1";
-            // 
             // gridColumn10
             // 
             this.gridColumn10.Caption = "RFM Number";
@@ -333,7 +294,29 @@
             this.gridColumn8.VisibleIndex = 9;
             this.gridColumn8.Width = 86;
             // 
-            // fPurchaser
+            // repositoryItemCalcEdit1
+            // 
+            this.repositoryItemCalcEdit1.AutoHeight = false;
+            this.repositoryItemCalcEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemCalcEdit1.DisplayFormat.FormatString = "### ### ##0.##";
+            this.repositoryItemCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.repositoryItemCalcEdit1.EditFormat.FormatString = "### ### ##0.##";
+            this.repositoryItemCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.repositoryItemCalcEdit1.Mask.EditMask = "### ### ##0.##";
+            this.repositoryItemCalcEdit1.Name = "repositoryItemCalcEdit1";
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Qty to purchase";
+            this.gridColumn9.DisplayFormat.FormatString = "### ### ##0.##";
+            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn9.FieldName = "slcan";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 10;
+            // 
+            // fProvider
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -341,7 +324,7 @@
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
-            this.Name = "fPurchaser";
+            this.Name = "fProvider";
             this.Text = "fPurchaser";
             this.Load += new System.EventHandler(this.fPurchaser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
@@ -349,10 +332,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tProvider.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tProvider.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tPONo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCalcEdit1)).EndInit();
@@ -369,11 +351,8 @@
         private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.TextEdit tPONo;
         private DevExpress.XtraEditors.TextEdit tProvider;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -388,5 +367,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit repositoryItemCalcEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }
