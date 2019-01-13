@@ -50,10 +50,15 @@ namespace Inventory
                 case 1004:
                     fKiemkedinhky frm1 = new fKiemkedinhky();
                     return frm1;
+                //frm.Text = si.MenuName;
+                //frm.ShowDialog();
+                case 1005:
+                    fBtKhuKho frm2 = new fBtKhuKho();
+                    return frm2;
                     //frm.Text = si.MenuName;
                     //frm.ShowDialog();
-                    
-            } return f;
+            }
+            return f;
         }
         #endregion
     }

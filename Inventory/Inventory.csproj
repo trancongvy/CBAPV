@@ -112,6 +112,18 @@
     <Compile Include="BangTinhGia.Designer.cs">
       <DependentUpon>BangTinhGia.cs</DependentUpon>
     </Compile>
+    <Compile Include="dmKhoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dmKhoControl.Designer.cs">
+      <DependentUpon>dmKhoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fBtKhuKho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fBtKhuKho.Designer.cs">
+      <DependentUpon>fBtKhuKho.cs</DependentUpon>
+    </Compile>
     <Compile Include="fKiemkedinhky.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +143,12 @@
     <EmbeddedResource Include="BangTinhGia.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BangTinhGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dmKhoControl.resx">
+      <DependentUpon>dmKhoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fBtKhuKho.resx">
+      <DependentUpon>fBtKhuKho.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fKiemkedinhky.resx">
       <SubType>Designer</SubType>

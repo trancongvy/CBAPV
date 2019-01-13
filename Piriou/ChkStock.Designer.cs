@@ -55,6 +55,8 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -176,7 +178,9 @@
             this.gridColumn10,
             this.gridColumn11,
             this.gridColumn12,
-            this.gridColumn13});
+            this.gridColumn13,
+            this.gridColumn15,
+            this.gridColumn16});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupCount = 1;
             this.gridView1.GroupFormat = " {1} {2}";
@@ -210,7 +214,7 @@
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
-            this.gridColumn2.Width = 87;
+            this.gridColumn2.Width = 73;
             // 
             // gridColumn3
             // 
@@ -220,7 +224,7 @@
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 3;
-            this.gridColumn3.Width = 67;
+            this.gridColumn3.Width = 55;
             // 
             // gridColumn4
             // 
@@ -238,7 +242,7 @@
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
-            this.gridColumn5.Width = 134;
+            this.gridColumn5.Width = 112;
             // 
             // gridColumn6
             // 
@@ -248,60 +252,63 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
-            this.gridColumn6.Width = 207;
+            this.gridColumn6.Width = 174;
             // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "Quantity";
             this.gridColumn7.ColumnEdit = this.repositoryItemCalcEdit1;
+            this.gridColumn7.DisplayFormat.FormatString = "### ### ##0.####";
+            this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn7.FieldName = "soluong";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.OptionsColumn.AllowEdit = false;
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
-            this.gridColumn7.Width = 120;
+            this.gridColumn7.Width = 62;
             // 
             // repositoryItemCalcEdit1
             // 
             this.repositoryItemCalcEdit1.AutoHeight = false;
             this.repositoryItemCalcEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemCalcEdit1.DisplayFormat.FormatString = "### ### ##0.##";
+            this.repositoryItemCalcEdit1.DisplayFormat.FormatString = "### ### ##0.####";
             this.repositoryItemCalcEdit1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.repositoryItemCalcEdit1.EditFormat.FormatString = "### ### ##0.##";
+            this.repositoryItemCalcEdit1.EditFormat.FormatString = "### ### ##0.####";
             this.repositoryItemCalcEdit1.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.repositoryItemCalcEdit1.Mask.EditMask = "### ### ##0.##";
+            this.repositoryItemCalcEdit1.Mask.EditMask = "### ### ##0.####";
             this.repositoryItemCalcEdit1.Name = "repositoryItemCalcEdit1";
             // 
             // gridColumn14
             // 
             this.gridColumn14.Caption = "gridColumn14";
             this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 11;
+            this.gridColumn14.Width = 55;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "BookStock";
             this.gridColumn8.ColumnEdit = this.repositoryItemCalcEdit1;
-            this.gridColumn8.DisplayFormat.FormatString = "### ### ##0.##";
+            this.gridColumn8.DisplayFormat.FormatString = "### ### ##0.####";
             this.gridColumn8.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn8.FieldName = "bookstock";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
-            this.gridColumn8.Width = 141;
+            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.Width = 78;
             // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "Qty to purchase";
             this.gridColumn9.ColumnEdit = this.repositoryItemCalcEdit1;
+            this.gridColumn9.DisplayFormat.FormatString = "### ### ##0.####";
+            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn9.FieldName = "slcan";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.OptionsColumn.AllowEdit = false;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 8;
-            this.gridColumn9.Width = 134;
+            this.gridColumn9.VisibleIndex = 9;
+            this.gridColumn9.Width = 101;
             // 
             // gridColumn10
             // 
@@ -311,7 +318,7 @@
             this.gridColumn10.OptionsColumn.AllowEdit = false;
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 1;
-            this.gridColumn10.Width = 73;
+            this.gridColumn10.Width = 60;
             // 
             // gridColumn11
             // 
@@ -321,7 +328,7 @@
             this.gridColumn11.OptionsColumn.AllowEdit = false;
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 2;
-            this.gridColumn11.Width = 98;
+            this.gridColumn11.Width = 81;
             // 
             // gridColumn12
             // 
@@ -329,7 +336,8 @@
             this.gridColumn12.FieldName = "mavt1";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 9;
+            this.gridColumn12.VisibleIndex = 11;
+            this.gridColumn12.Width = 87;
             // 
             // gridColumn13
             // 
@@ -337,11 +345,32 @@
             this.gridColumn13.FieldName = "mrchange";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 10;
+            this.gridColumn13.VisibleIndex = 12;
+            this.gridColumn13.Width = 108;
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "Number of Ship";
+            this.gridColumn15.DisplayFormat.FormatString = "##0";
+            this.gridColumn15.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn15.FieldName = "VesselCoefDT29";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 7;
+            this.gridColumn15.Width = 94;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "Stock Focus";
+            this.gridColumn16.FieldName = "MaVT2";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 10;
+            this.gridColumn16.Width = 71;
             // 
             // ChkStock
             // 
@@ -398,5 +427,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }

@@ -48,6 +48,12 @@ namespace KhaiHoang
                 case 6102:
                     fGTKhaiHoang2 cocp2 = new fGTKhaiHoang2();
                     return cocp2;
+                case 6103:
+                    fGTKAone1 cocp3 = new fGTKAone1();
+                    return cocp3;
+                case 6104:
+                    fGTKAone2 cocp4 = new fGTKAone2();
+                    return cocp4;
 
             }
             return f;

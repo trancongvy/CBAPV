@@ -38,6 +38,16 @@ namespace Banhang
                     frm1.Text = si.MenuName;
                     //frm.ShowDialog();
                     return frm1;
+                case 3503:
+                    fTaoPhieuXuatLSX frm2 = new fTaoPhieuXuatLSX();
+                    frm2.Text = si.MenuName;
+                    //frm.ShowDialog();
+                    return frm2;
+                case 3504:
+                    fNhapTP frm3 = new fNhapTP();
+                    frm3.Text = si.MenuName;
+                    //frm.ShowDialog();
+                    return frm3;
             }
             return f;
         }

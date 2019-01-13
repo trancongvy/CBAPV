@@ -48,10 +48,11 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCalcEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -182,6 +183,7 @@
             this.gridColumn5,
             this.gridColumn6,
             this.gridColumn10,
+            this.gridColumn12,
             this.gridColumn11,
             this.gridColumn9,
             this.gridColumn7,
@@ -272,9 +274,17 @@
             this.gridColumn11.FieldName = "MaBanve";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.OptionsColumn.AllowEdit = false;
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 6;
             this.gridColumn11.Width = 103;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Qty to purchase";
+            this.gridColumn9.DisplayFormat.FormatString = "### ### ##0.##";
+            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn9.FieldName = "slcan";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 10;
             // 
             // gridColumn7
             // 
@@ -306,15 +316,14 @@
             this.repositoryItemCalcEdit1.Mask.EditMask = "### ### ##0.##";
             this.repositoryItemCalcEdit1.Name = "repositoryItemCalcEdit1";
             // 
-            // gridColumn9
+            // gridColumn12
             // 
-            this.gridColumn9.Caption = "Qty to purchase";
-            this.gridColumn9.DisplayFormat.FormatString = "### ### ##0.##";
-            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.gridColumn9.FieldName = "slcan";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 10;
+            this.gridColumn12.Caption = "Project No";
+            this.gridColumn12.FieldName = "ProjectNo";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.OptionsColumn.AllowFocus = false;
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 6;
             // 
             // fProvider
             // 
@@ -368,5 +377,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit repositoryItemCalcEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
     }
 }

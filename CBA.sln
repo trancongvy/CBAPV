@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CusPiriou", "CusPiriou\CusP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDT", "..\CDT\CDT\CDT.csproj", "{A48C0424-B640-40F9-9F72-9D96667B6160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clinic", "Clinic\Clinic.csproj", "{393CCE2A-6136-4544-9B00-63AC958B22E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLSX", "Clinic\QLSX.csproj", "{393CCE2A-6136-4544-9B00-63AC958B22E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

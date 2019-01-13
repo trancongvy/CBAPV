@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Clinic
+namespace Inventory
 {
-    public partial class fBocso : Form
+    public partial class dmKhoControl : UserControl
     {
-        public fBocso()
+        public dmKhoControl(ref DataTable tb)
         {
             InitializeComponent();
+            gridControl1.DataSource = tb;
         }
     }
 }
