@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CBSControls">
+      <HintPath>..\..\CBS Controls\bin\Debug\CBSControls.dll</HintPath>
+    </Reference>
     <Reference Include="CDTControl">
       <HintPath>..\..\CDT\CDT\bin\Debug\CDTControl.dll</HintPath>
     </Reference>
@@ -41,13 +44,22 @@
       <HintPath>..\..\CDT\CDT\bin\Debug\CDTLib.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.DemoData.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v11.1.Core, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Tutorials.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v11.1.Design, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v11.1.Core, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v11.1, Version=11.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="Plugins">
       <HintPath>..\..\CDT\CDT\bin\Debug\Plugins.dll</HintPath>
     </Reference>
@@ -68,6 +80,18 @@
     </Compile>
     <Compile Include="fAppoint.Designer.cs">
       <DependentUpon>fAppoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fNhapTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fNhapTP.Designer.cs">
+      <DependentUpon>fNhapTP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fTaoPhieuXuatLSX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTaoPhieuXuatLSX.Designer.cs">
+      <DependentUpon>fTaoPhieuXuatLSX.cs</DependentUpon>
     </Compile>
     <Compile Include="LSXappoint.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -96,6 +120,12 @@
     <EmbeddedResource Include="fLichSX.resx">
       <DependentUpon>fLichSX.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fNhapTP.resx">
+      <DependentUpon>fNhapTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTaoPhieuXuatLSX.resx">
+      <DependentUpon>fTaoPhieuXuatLSX.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -104,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\LSXappoint.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

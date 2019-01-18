@@ -36,7 +36,16 @@ namespace QLSX
                     frm.Text = si.MenuName;
                     //frm.ShowDialog();
                     return frm;
-                
+                case 7002:
+                    fNhapTP frm1 = new fNhapTP();
+                    frm1.Text = si.MenuName;
+                    //frm.ShowDialog();
+                    return frm1;
+                case 7003:
+                    fTaoPhieuXuatLSX frm2 = new fTaoPhieuXuatLSX();
+                    frm2.Text = si.MenuName;
+                    //frm.ShowDialog();
+                    return frm2;
             }
             return f;
         }

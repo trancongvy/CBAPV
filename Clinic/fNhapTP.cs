@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using CDTDatabase;
 using CDTLib;
-namespace Banhang
+namespace QLSX
 {
     public partial class fNhapTP : Form
     {
@@ -57,7 +57,7 @@ namespace Banhang
 
         private void DTLSX_ColumnChanging(object sender, DataColumnChangeEventArgs e)
         {
-           if(e.Column.ColumnName== "DangChay")
+           if(e.Column.ColumnName== "DangChay" && !bool.Parse(e.Row["DangChay"].ToString()))
            {
                 if (bool.Parse(e.ProposedValue.ToString()) && e.Row["TuNgay"] == DBNull.Value)
                 {
@@ -85,21 +85,34 @@ namespace Banhang
                     e.ProposedValue = false;
                 }
             }
-            else if(e.Column.ColumnName == "HoanThanh" ) {
+            else if(e.Column.ColumnName == "HoanThanh" && !bool.Parse(e.Row["HoanThanh"].ToString()) ) {
                 if (bool.Parse(e.ProposedValue.ToString()) && e.Row["DenNgay"] == DBNull.Value && bool.Parse(e.Row["DangChay"].ToString()) && e.Row["TrangThai"].ToString()=="1")
                 {
                     if (MessageBox.Show("Bạn có chắc chắn thực hiện hoàn thành lịch sản xuất này không?", "Chắc chắn", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
+                        dbdata.BeginMultiTrans();
                         string sql = "update CTLichSX set Denngay=cast('" + DateTime.Now.ToString() + "' as datetime), TrangThai=2 where CTLichSXID='" + e.Row["CTLichSXID"].ToString() + "'";
                         dbdata.UpdateByNonQuery(sql);
                         if (dbdata.HasErrors)
                         {
                             e.ProposedValue = false;
+                            dbdata.RollbackMultiTrans();
                         }
                         else
                         {
                             e.Row["DenNgay"] = DateTime.Now.ToString();
                             e.Row["TrangThai"] = 2;
+                            if(TaoPhieuNhap())
+                            {
+                                e.Row["SLTPNhap"] = 0;
+                                dbdata.EndMultiTrans();
+                            }
+                            else
+                            {
+                                e.ProposedValue = false;
+                                dbdata.RollbackMultiTrans();
+                            }
+
                         }
                     }
                     else
@@ -133,39 +146,37 @@ namespace Banhang
             
         }
 
-
-
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private bool TaoPhieuNhap()
         {
             string sql = "";
             string soct = "";
             try
             {
                 Guid ID = Guid.NewGuid();
-                DataRow[] ldr = DTLSX.Select("Chon=1");
-                if (ldr.Length == 0) return;
+                DataRow[] ldr = DTLSX.Select("HoanThanh=1 and SLTPNhap >0 ");
+                if (ldr.Length == 0) return false;
                 object o = dbStrucst.GetValue("select dbo.AutoCreate('MT41',2)");
                 if (o != null) soct = o.ToString();
                 Guid task = Guid.NewGuid();
-                o = dbStrucst.GetValue("select CDTBTP.dbo.GetBTid('DT41')");
+                o = dbStrucst.GetValue("select dbo.GetBTid('DT41')");
                 if (o == null) o = task;
                 dbdata.BeginMultiTrans();
                 sql = "insert into MT41 (mt41ID,MaCT, NGayCT,SoCT,Approved,Diengiai,MaNT, Tygia, TTienNT, TTien,PrintIndex,sysDBID,TaskID,  MaCN) values (";
                 sql += "@mt41ID,@MaCT, @NGayCT,@SoCT,@Approved,@Diengiai,@MaNT, @Tygia, @TTienNT, @TTien,@PrintIndex,@sysDBID,@TaskID, @MaCN)";
-                dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID","@MaCT", "@NGayCT","@SoCT","@Approved","@Diengiai","@MaNT","@Tygia", "@TTienNT", "@TTien","@PrintIndex","@sysDBID","@TaskID", "@MaCN" },
+                dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@MaCT", "@NGayCT", "@SoCT", "@Approved", "@Diengiai", "@MaNT", "@Tygia", "@TTienNT", "@TTien", "@PrintIndex", "@sysDBID", "@TaskID", "@MaCN" },
                     new object[] { ID, "NSX", ngayct, soct, 0, "Nhập kho thành phẩm", "VND", 1, 0, 0, 0, 2, o, macn });
                 if (dbdata.HasErrors)
                 {
                     dbdata.RollbackMultiTrans();
                     dbdata.HasErrors = false;
                     MessageBox.Show("Lỗi");
-                    return;
+                    return false;
                 }
                 foreach (DataRow dr in ldr)
                 {
                     sql = "insert into DT41 (mt41ID,DT41ID, MaVT, Soluong, Gia, GiaNT,Ps, PsNT,MTLSXID, DTLSXID,MaMin, MaDVT, tkco, tkno) select ";
                     sql += "@mt41ID,@DT41ID, @MaVT, @Soluong, @Gia, @GiaNT,@Ps, @PsNT,@MTLSXID, @DTLSXID,@MaMin, MaDVT, TkKho, TkGV from dmvt where mavt=@MaVT ";
-                    dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID","@DT41ID","@MaVT", "@Soluong", "@Gia", "@GiaNT","@Ps", "@PsNT","@MTLSXID", "@DTLSXID","@MaMin" },
+                    dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@DT41ID", "@MaVT", "@Soluong", "@Gia", "@GiaNT", "@Ps", "@PsNT", "@MTLSXID", "@DTLSXID", "@MaMin" },
                         new object[] { ID, Guid.NewGuid(), dr["MaVT"].ToString(), double.Parse(dr["SLTPNhap"].ToString()), 0, 0, 0, 0, Guid.Parse(dr["MTLSXID"].ToString()), Guid.Parse(dr["DTLSXID"].ToString()), dr["MaMin"].ToString() });
                     sql = "update dtLSX set SLTPNK=SLTPNK+" + dr["SLTPNhap"].ToString();
                     dbdata.UpdateByNonQuery(sql);
@@ -174,7 +185,7 @@ namespace Banhang
                         dbdata.RollbackMultiTrans();
                         dbdata.HasErrors = false;
                         MessageBox.Show("Lỗi");
-                        return;
+                        return false;
                     }
                 }
                 if (!dbdata.HasErrors)
@@ -182,16 +193,17 @@ namespace Banhang
                     dbdata.EndMultiTrans();
                     dbStrucst.UpdateDatabyStore("UpdateSoct", new string[] { "@tableName", "@sysDBID", "@SoCT", "@MaCN" }, new object[] { "MT41", 2, soct, null });
                     MessageBox.Show("Đã tạo phiếu nhập thành phẩm");
+                    return true;
                 }
                 else
                 {
                     dbdata.RollbackMultiTrans();
                     dbdata.HasErrors = false;
                     MessageBox.Show("Lỗi");
-                    return;
+                    return false;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { return false; }
             finally
             {
                 if (dbdata.Connection.State != ConnectionState.Closed)
@@ -199,9 +211,15 @@ namespace Banhang
             }
         }
 
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            TaoPhieuNhap();
+        }
+
         private void gridLookUpEdit2_EditValueChanged(object sender, EventArgs e)
         {
             Mayin  = gridLookUpEdit2.EditValue.ToString();
+            getData();
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
