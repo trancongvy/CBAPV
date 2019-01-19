@@ -86,34 +86,26 @@ namespace QLSX
                 }
             }
             else if(e.Column.ColumnName == "HoanThanh" && !bool.Parse(e.Row["HoanThanh"].ToString()) ) {
-                if (bool.Parse(e.ProposedValue.ToString()) && e.Row["DenNgay"] == DBNull.Value && bool.Parse(e.Row["DangChay"].ToString()) && e.Row["TrangThai"].ToString()=="1")
+                if (bool.Parse(e.ProposedValue.ToString()) &&  bool.Parse(e.Row["DangChay"].ToString()) && e.Row["TrangThai"].ToString()=="1")
                 {
                     if (MessageBox.Show("Bạn có chắc chắn thực hiện hoàn thành lịch sản xuất này không?", "Chắc chắn", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        dbdata.BeginMultiTrans();
-                        string sql = "update CTLichSX set Denngay=cast('" + DateTime.Now.ToString() + "' as datetime), TrangThai=2 where CTLichSXID='" + e.Row["CTLichSXID"].ToString() + "'";
-                        dbdata.UpdateByNonQuery(sql);
-                        if (dbdata.HasErrors)
+                        e.Row["DenNgay"] = DateTime.Now.ToString();
+                        e.Row["TrangThai"] = 2;
+                        if (TaoPhieuNhap(e.Row))
                         {
-                            e.ProposedValue = false;
-                            dbdata.RollbackMultiTrans();
+                            e.Row["SLTPNhap"] = 0;
+                            string sql = "update CTLichSX set Denngay=cast('" + DateTime.Now.ToString() + "' as datetime), TrangThai=2 where CTLichSXID='" + e.Row["CTLichSXID"].ToString() + "'";
+                            dbdata.UpdateByNonQuery(sql);
+                          
                         }
                         else
                         {
-                            e.Row["DenNgay"] = DateTime.Now.ToString();
-                            e.Row["TrangThai"] = 2;
-                            if(TaoPhieuNhap())
-                            {
-                                e.Row["SLTPNhap"] = 0;
-                                dbdata.EndMultiTrans();
-                            }
-                            else
-                            {
-                                e.ProposedValue = false;
-                                dbdata.RollbackMultiTrans();
-                            }
+                            e.ProposedValue = false;
 
                         }
+
+                        
                     }
                     else
                     {
@@ -146,15 +138,14 @@ namespace QLSX
             
         }
 
-        private bool TaoPhieuNhap()
+        private bool TaoPhieuNhap(DataRow dr)
         {
             string sql = "";
             string soct = "";
             try
             {
                 Guid ID = Guid.NewGuid();
-                DataRow[] ldr = DTLSX.Select("HoanThanh=1 and SLTPNhap >0 ");
-                if (ldr.Length == 0) return false;
+
                 object o = dbStrucst.GetValue("select dbo.AutoCreate('MT41',2)");
                 if (o != null) soct = o.ToString();
                 Guid task = Guid.NewGuid();
@@ -172,22 +163,21 @@ namespace QLSX
                     MessageBox.Show("Lỗi");
                     return false;
                 }
-                foreach (DataRow dr in ldr)
+
+                sql = "insert into DT41 (mt41ID,DT41ID, MaVT, Soluong, Gia, GiaNT,Ps, PsNT,MTLSXID, DTLSXID,CtLichSXID,MaMin, MaDVT, tkco, tkno) select ";
+                sql += "@mt41ID,@DT41ID, @MaVT, @Soluong, @Gia, @GiaNT,@Ps, @PsNT,@MTLSXID, @DTLSXID,@CtLichSXID,@MaMin, MaDVT, TkKho, TkGV from dmvt where mavt=@MaVT ";
+                dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@DT41ID", "@MaVT", "@Soluong", "@Gia", "@GiaNT", "@Ps", "@PsNT", "@MTLSXID", "@DTLSXID","@CtLichSXID", "@MaMin" },
+                    new object[] { ID, Guid.NewGuid(), dr["MaVT"].ToString(), double.Parse(dr["SLTPNhap"].ToString()), 0, 0, 0, 0, Guid.Parse(dr["MTLSXID"].ToString()), Guid.Parse(dr["DTLSXID"].ToString()),Guid.Parse(dr["CtLichSXID"].ToString()), dr["MaMin"].ToString() });
+                sql = "update dtLSX set SLTPNK=SLTPNK+" + dr["SLTPNhap"].ToString() + " where DTLSXID='" + dr["DTLSXID"].ToString() +"'";
+                dbdata.UpdateByNonQuery(sql);
+                if (dbdata.HasErrors)
                 {
-                    sql = "insert into DT41 (mt41ID,DT41ID, MaVT, Soluong, Gia, GiaNT,Ps, PsNT,MTLSXID, DTLSXID,MaMin, MaDVT, tkco, tkno) select ";
-                    sql += "@mt41ID,@DT41ID, @MaVT, @Soluong, @Gia, @GiaNT,@Ps, @PsNT,@MTLSXID, @DTLSXID,@MaMin, MaDVT, TkKho, TkGV from dmvt where mavt=@MaVT ";
-                    dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@DT41ID", "@MaVT", "@Soluong", "@Gia", "@GiaNT", "@Ps", "@PsNT", "@MTLSXID", "@DTLSXID", "@MaMin" },
-                        new object[] { ID, Guid.NewGuid(), dr["MaVT"].ToString(), double.Parse(dr["SLTPNhap"].ToString()), 0, 0, 0, 0, Guid.Parse(dr["MTLSXID"].ToString()), Guid.Parse(dr["DTLSXID"].ToString()), dr["MaMin"].ToString() });
-                    sql = "update dtLSX set SLTPNK=SLTPNK+" + dr["SLTPNhap"].ToString();
-                    dbdata.UpdateByNonQuery(sql);
-                    if (dbdata.HasErrors)
-                    {
-                        dbdata.RollbackMultiTrans();
-                        dbdata.HasErrors = false;
-                        MessageBox.Show("Lỗi");
-                        return false;
-                    }
+                    dbdata.RollbackMultiTrans();
+                    dbdata.HasErrors = false;
+                    MessageBox.Show("Lỗi");
+                    return false;
                 }
+
                 if (!dbdata.HasErrors)
                 {
                     dbdata.EndMultiTrans();
@@ -213,7 +203,7 @@ namespace QLSX
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            TaoPhieuNhap();
+           // TaoPhieuNhap();
         }
 
         private void gridLookUpEdit2_EditValueChanged(object sender, EventArgs e)
