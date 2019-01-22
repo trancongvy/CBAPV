@@ -46,6 +46,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,7 +60,6 @@
             this.repositoryItemCalcEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dNgay.Properties.VistaTimeProperties)).BeginInit();
@@ -245,7 +245,7 @@
             this.gridColumn16.FieldName = "DangChay";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 13;
+            this.gridColumn16.VisibleIndex = 12;
             this.gridColumn16.Width = 67;
             // 
             // repositoryItemCheckEdit1
@@ -284,6 +284,18 @@
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
             this.gridColumn3.Width = 137;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "Kết thúc lúc";
+            this.gridColumn15.DisplayFormat.FormatString = "dd/MM/yyyy hh:mm tt";
+            this.gridColumn15.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn15.FieldName = "DenNgayKH";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.OptionsColumn.AllowEdit = false;
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 3;
+            this.gridColumn15.Width = 121;
             // 
             // gridColumn4
             // 
@@ -350,7 +362,7 @@
             this.gridColumn10.Caption = "SL TP";
             this.gridColumn10.DisplayFormat.FormatString = "### ### ##0.##";
             this.gridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.gridColumn10.FieldName = "SoluongTP";
+            this.gridColumn10.FieldName = "SoLuong";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.OptionsColumn.AllowEdit = false;
             this.gridColumn10.Visible = true;
@@ -364,19 +376,17 @@
             this.gridColumn11.FieldName = "SLTPSIN";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.OptionsColumn.AllowEdit = false;
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 11;
             // 
             // gridColumn12
             // 
             this.gridColumn12.Caption = "SL  đã nhập";
             this.gridColumn12.DisplayFormat.FormatString = "### ### ##0.##";
             this.gridColumn12.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.gridColumn12.FieldName = "SLTPNK";
+            this.gridColumn12.FieldName = "SlDaNhap";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 12;
+            this.gridColumn12.VisibleIndex = 11;
             // 
             // gridColumn13
             // 
@@ -387,7 +397,7 @@
             this.gridColumn13.FieldName = "SLTPNhap";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 15;
+            this.gridColumn13.VisibleIndex = 14;
             // 
             // repositoryItemCalcEdit1
             // 
@@ -403,7 +413,7 @@
             this.gridColumn14.FieldName = "HoanThanh";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 14;
+            this.gridColumn14.VisibleIndex = 13;
             // 
             // panelControl2
             // 
@@ -412,18 +422,6 @@
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(1370, 49);
             this.panelControl2.TabIndex = 4;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "Kết thúc lúc";
-            this.gridColumn15.DisplayFormat.FormatString = "dd/MM/yyyy hh:mm tt";
-            this.gridColumn15.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn15.FieldName = "DenNgayKH";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.OptionsColumn.AllowEdit = false;
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 3;
-            this.gridColumn15.Width = 121;
             // 
             // fNhapTP
             // 

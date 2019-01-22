@@ -86,6 +86,8 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.tbOk = new DevExpress.XtraEditors.SimpleButton();
             this.schedulerStorage1 = new DevExpress.XtraScheduler.SchedulerStorage(this.components);
+            this.cSLDaNhap = new DevExpress.XtraEditors.CalcEdit();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cSoluong.Properties)).BeginInit();
@@ -148,10 +150,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.schedulerStorage1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cSLDaNhap.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cSLDaNhap);
             this.layoutControl1.Controls.Add(this.cSoluong);
             this.layoutControl1.Controls.Add(this.label1);
             this.layoutControl1.Controls.Add(this.sTrangThai);
@@ -204,7 +209,7 @@
             this.cSoluong.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.cSoluong.Properties.Mask.EditMask = "### ### ### ##0.##";
             this.cSoluong.Properties.ReadOnly = true;
-            this.cSoluong.Size = new System.Drawing.Size(217, 20);
+            this.cSoluong.Size = new System.Drawing.Size(73, 20);
             this.cSoluong.StyleController = this.layoutControl1;
             this.cSoluong.TabIndex = 27;
             // 
@@ -366,6 +371,8 @@
             this.tDenNgayKH.EditValue = new System.DateTime(2019, 1, 17, 17, 19, 0, 0);
             this.tDenNgayKH.Location = new System.Drawing.Point(168, 108);
             this.tDenNgayKH.Name = "tDenNgayKH";
+            this.tDenNgayKH.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+            this.tDenNgayKH.Properties.AppearanceReadOnly.Options.UseBackColor = true;
             this.tDenNgayKH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.tDenNgayKH.Properties.DisplayFormat.FormatString = "hh:mm tt";
@@ -373,6 +380,7 @@
             this.tDenNgayKH.Properties.EditFormat.FormatString = "hh:mm tt";
             this.tDenNgayKH.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.tDenNgayKH.Properties.Mask.EditMask = "hh:mm tt";
+            this.tDenNgayKH.Properties.ReadOnly = true;
             this.tDenNgayKH.Size = new System.Drawing.Size(64, 20);
             this.tDenNgayKH.StyleController = this.layoutControl1;
             this.tDenNgayKH.TabIndex = 16;
@@ -401,6 +409,8 @@
             this.dDenNgayKH.EditValue = null;
             this.dDenNgayKH.Location = new System.Drawing.Point(78, 108);
             this.dDenNgayKH.Name = "dDenNgayKH";
+            this.dDenNgayKH.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+            this.dDenNgayKH.Properties.AppearanceReadOnly.Options.UseBackColor = true;
             this.dDenNgayKH.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dDenNgayKH.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
@@ -408,6 +418,7 @@
             this.dDenNgayKH.Properties.EditFormat.FormatString = "dd/MM/yyyy";
             this.dDenNgayKH.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.dDenNgayKH.Properties.Mask.EditMask = "dd/MM/yyyy";
+            this.dDenNgayKH.Properties.ReadOnly = true;
             this.dDenNgayKH.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.dDenNgayKH.Size = new System.Drawing.Size(86, 20);
@@ -599,7 +610,8 @@
             this.layoutControlItem16,
             this.layoutControlItem23,
             this.layoutControlItem24,
-            this.layoutControlItem25});
+            this.layoutControlItem25,
+            this.layoutControlItem7});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
             this.layoutControlGroup1.Size = new System.Drawing.Size(749, 381);
@@ -890,7 +902,7 @@
             this.layoutControlItem25.CustomizationFormText = "Số lượng";
             this.layoutControlItem25.Location = new System.Drawing.Point(442, 48);
             this.layoutControlItem25.Name = "layoutControlItem25";
-            this.layoutControlItem25.Size = new System.Drawing.Size(287, 24);
+            this.layoutControlItem25.Size = new System.Drawing.Size(143, 24);
             this.layoutControlItem25.Text = "Số lượng";
             this.layoutControlItem25.TextSize = new System.Drawing.Size(63, 13);
             // 
@@ -911,6 +923,39 @@
             this.tbOk.TabIndex = 0;
             this.tbOk.Text = "OK";
             this.tbOk.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // cSLDaNhap
+            // 
+            this.cSLDaNhap.EditValue = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.cSLDaNhap.Location = new System.Drawing.Point(663, 60);
+            this.cSLDaNhap.Name = "cSLDaNhap";
+            this.cSLDaNhap.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.White;
+            this.cSLDaNhap.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+            this.cSLDaNhap.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cSLDaNhap.Properties.DisplayFormat.FormatString = "### ### ### ##0.##";
+            this.cSLDaNhap.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.cSLDaNhap.Properties.EditFormat.FormatString = "### ### ### ##0.##";
+            this.cSLDaNhap.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.cSLDaNhap.Properties.Mask.EditMask = "### ### ### ##0.##";
+            this.cSLDaNhap.Properties.ReadOnly = true;
+            this.cSLDaNhap.Size = new System.Drawing.Size(74, 20);
+            this.cSLDaNhap.StyleController = this.layoutControl1;
+            this.cSLDaNhap.TabIndex = 28;
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.cSLDaNhap;
+            this.layoutControlItem7.CustomizationFormText = "Đã nhập";
+            this.layoutControlItem7.Location = new System.Drawing.Point(585, 48);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(144, 24);
+            this.layoutControlItem7.Text = "Đã nhập";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(63, 13);
             // 
             // fAppoint
             // 
@@ -984,6 +1029,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.schedulerStorage1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cSLDaNhap.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1047,5 +1094,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private DevExpress.XtraEditors.CalcEdit cSoluong;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
+        private DevExpress.XtraEditors.CalcEdit cSLDaNhap;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
     }
 }

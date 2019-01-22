@@ -17,9 +17,9 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.Utils.Menu;
 namespace QLSX
 {
-    public partial class fLichSX : XtraForm
+    public partial class fLichSXView : XtraForm
     {
-        public fLichSX()
+        public fLichSXView()
         {
             InitializeComponent();
 
@@ -39,8 +39,8 @@ namespace QLSX
         DataTable ctLichSX;
         DataTable dmMayin;
         DataTable dmVT;
-        DataTable ctTangCa;
         DataTable LSXChuaSapLich;
+        DataTable ctTangCa;
         BindingList<LSXappoint> ctLichSXBind=new BindingList<LSXappoint>();
         private void simpleButton1_Click(object sender, EventArgs e)
         {
@@ -60,8 +60,8 @@ namespace QLSX
         private void getData(DateTime ngayct1, DateTime ngayct2)
         {
             //throw new NotImplementedException();
-            ctTangCa = dbdata.GetDataTable("select * from ctTangCa where ngay>='" + ngayct1.AddDays(-1).ToString() + "'")
-;            LSXChuaSapLich = dbdata.GetDataSetByStore("GetMTLSXchuaThuchien", new string[] { }, new object[] { });
+
+            LSXChuaSapLich = dbdata.GetDataSetByStore("GetMTLSXchuaThuchien", new string[] { }, new object[] { });
             LSXChuaSapLich.TableName = "MTLSX";
             gridControl1.DataSource = LSXChuaSapLich;
             ctLichSX = dbdata.GetDataSetByStore("getLichSX", new string[] { "@Tungay", "@Denngay" }, new object[] { ngayct1, ngayct2 });
@@ -81,11 +81,6 @@ namespace QLSX
         private void fLichSX_Load(object sender, EventArgs e)
         {
             dockManager1.BeginUpdate();
-            DateTime bWork = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + Config.GetValue("TimeStart").ToString() + ":00");
-            DateTime eWork = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + Config.GetValue("TimeEnd").ToString() + ":00");
-            schedu.TimelineView.WorkTime = new TimeOfDayInterval(new TimeSpan(bWork.Hour, bWork.Minute, bWork.Second), new TimeSpan(eWork.Hour, eWork.Minute, eWork.Second));
-            schedu.WorkWeekView.WorkTime = new TimeOfDayInterval(new TimeSpan(bWork.Hour, bWork.Minute, bWork.Second), new TimeSpan(eWork.Hour, eWork.Minute, eWork.Second));
-            schedu.DayView.WorkTime = new TimeOfDayInterval(new TimeSpan(bWork.Hour, bWork.Minute, bWork.Second), new TimeSpan(eWork.Hour, eWork.Minute, eWork.Second));
             dockPanel1.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             dockPanel2.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
             dockPanel3.Visibility = DevExpress.XtraBars.Docking.DockVisibility.AutoHide;
@@ -120,11 +115,11 @@ namespace QLSX
             this.schedulerStorage1.BeginUpdate();
             this.schedulerStorage1.Appointments.DataSource =  ctLichSXBind;//ctLichSX;//
             this.schedulerStorage1.Appointments.Mappings.Description = "GhiChu";
-            this.schedulerStorage1.Appointments.Mappings.End = "End";
+            this.schedulerStorage1.Appointments.Mappings.End = "DenNgayKH";
             this.schedulerStorage1.Appointments.Mappings.Location = "TenHang";
             this.schedulerStorage1.Appointments.Mappings.RecurrenceInfo = "MaMIn";
             this.schedulerStorage1.Appointments.Mappings.ResourceId = "MaMIn";
-            this.schedulerStorage1.Appointments.Mappings.Start = "Start";
+            this.schedulerStorage1.Appointments.Mappings.Start = "TuNgayKH";
             // this.schedulerStorage1.Appointments.Mappings.Type = "LichSXID";
             this.schedulerStorage1.Appointments.Mappings.Subject = "SoCT";
 
@@ -149,26 +144,17 @@ namespace QLSX
         {
             List<LSXappoint> x = ctLichSXBind.ToList();
             LSXappoint apt = x.Find(m => m.ctLichSXID.ToString() == e.Object.CustomFields["ctID"].ToString());
-
             if (apt != null)
             {
-                if (apt.TrangThai !=0 )
+                if (apt.TuNgayKH<= DateTime.Now || (e.Object as Appointment).Start <= DateTime.Now || apt.TrangThai>0)
                 {
                     e.Cancel = true;
                     return;
                 }
-                if ((e.Object as Appointment).Start != apt.Start) apt.TuNgayKH = (e.Object as Appointment).Start;
-                (e.Object as Appointment).Start = apt.Start;
-                (e.Object as Appointment).End = apt.End;
-                //fAppoint fA = new fAppoint(schedu, apt, false);
-                
-                //if (fA.ShowDialog() == DialogResult.OK)
-                //{
-                //    (e.Object as Appointment).Start = apt.Start;
-                //    (e.Object as Appointment).End = apt.End;
-                //}
+                apt.TuNgayKH = (e.Object as Appointment).Start;
+                apt.DenNgayKH = (e.Object as Appointment).End;
+                apt.UpdateDr();
             }
-        
         }
 
 
@@ -193,11 +179,11 @@ namespace QLSX
             else e.Handled = true;
             LSXappoint apt = x.Find(m => m.ctLichSXID.ToString() == e.Appointment.CustomFields["ctID"].ToString());
             if (apt != null) {
-                fAppoint fA = new fAppoint(schedu,apt,false);
+                fAppoint fA = new fAppoint(schedu,apt,true);
                 if (fA.ShowDialog() == DialogResult.OK)
                 {
-                    e.Appointment.Start = apt.Start;
-                    e.Appointment.End = apt.End;
+                    e.Appointment.Start = apt.TuNgayKH;
+                    e.Appointment.End = apt.DenNgayKH;
                 }
 
             } 
@@ -245,21 +231,19 @@ namespace QLSX
             {
                 dr["TuNgayKH"] = DateTime.Parse(DateTime.Now.ToShortDateString());
                 dr["DenNgayKH"] = DateTime.Parse(DateTime.Parse(dr["TuNgayKH"].ToString()).AddHours(2).ToString());
-                dr["TongsoGioKH"] = 2;
             }
             else
             {
                 dr["TuNgayKH"] = schedu.SelectedInterval.Start;
                 dr["DenNgayKH"] = schedu.SelectedInterval.End;
-                dr["TongsoGioKH"] = schedu.SelectedInterval.Duration.TotalHours;// + schedu.SelectedInterval.Duration.Minutes/60;
             }
            
             LSXappoint apt = new LSXappoint(schedu,dr, ref ctTangCa);
           
-           // apt.Start = DateTime.Parse(DateTime.Now.ToShortDateString());
-          //  apt.End = DateTime.Parse(DateTime.Parse(dr["TuNgayKH"].ToString()).AddHours(2).ToString());
+            apt.Start = DateTime.Parse(DateTime.Now.ToShortDateString());
+            apt.End = DateTime.Parse(DateTime.Parse(dr["TuNgayKH"].ToString()).AddHours(2).ToString());
 
-            fAppoint Af = new fAppoint(schedu,apt,false);
+            fAppoint Af = new fAppoint(schedu,apt,true);
             if (Af.ShowDialog() == DialogResult.OK)
             {
                 ctLichSXBind.Add(apt);
@@ -348,26 +332,7 @@ namespace QLSX
             schedu.ActiveViewType = SchedulerViewType.WorkWeek;
         }
 
-        private void chkShowWork_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            schedu.WorkWeekView.ShowWorkTimeOnly = chkShowWork.Checked;
-
-        }
-
-        private void chkWorkDay_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            schedu.WorkDays.BeginUpdate();
-            schedu.WorkDays.Clear();
-            if (chkWorkDay.Checked)
-            {
-                schedu.WorkDays.Add(WeekDays.Monday | WeekDays.Tuesday | WeekDays.Wednesday| WeekDays.Thursday | WeekDays.Friday | WeekDays.Saturday);
-            }
-            else
-            {
-                schedu.WorkDays.Add(WeekDays.Monday | WeekDays.Tuesday | WeekDays.Wednesday | WeekDays.Thursday | WeekDays.Friday );
-
-            }
-            schedu.WorkDays.EndUpdate();
-        }
+       
+        
     }
 }

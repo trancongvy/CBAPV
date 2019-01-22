@@ -2,7 +2,7 @@
 
 namespace QLSX
 {
-    partial class fLichSX
+    partial class fLichSXView
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@ namespace QLSX
             DevExpress.XtraScheduler.TimeScaleHour timeScaleHour1 = new DevExpress.XtraScheduler.TimeScaleHour();
             DevExpress.XtraScheduler.TimeScaleFixedInterval timeScaleFixedInterval1 = new DevExpress.XtraScheduler.TimeScaleFixedInterval();
             DevExpress.XtraScheduler.TimeRuler timeRuler2 = new DevExpress.XtraScheduler.TimeRuler();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fLichSX));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fLichSXView));
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,20 +82,15 @@ namespace QLSX
             this.bResource = new DevExpress.XtraBars.BarEditItem();
             this.sResource = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.bTugio = new DevExpress.XtraBars.BarEditItem();
             this.tTugio = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
-            this.bDengio = new DevExpress.XtraBars.BarEditItem();
             this.tDengio = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
-            this.chkShowWork = new DevExpress.XtraBars.BarCheckItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.chkWorkDay = new DevExpress.XtraBars.BarCheckItem();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage6 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemDuration1 = new DevExpress.XtraScheduler.UI.RepositoryItemDuration();
             this.repositoryItemTimeEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
@@ -468,15 +463,11 @@ namespace QLSX
             this.schedu.Views.TimelineView.ResourcesPerPage = 5;
             timeScaleYear1.Enabled = false;
             timeScaleQuarter1.Enabled = false;
-            timeScaleMonth1.DisplayFormat = "MM/yyyy";
             timeScaleMonth1.Enabled = false;
-            timeScaleWeek1.DisplayFormat = "dddd,dd/MM/yy";
-            timeScaleDay1.DisplayFormat = "dd/MM";
-            timeScaleHour1.DisplayFormat = "hh:mm";
-            timeScaleHour1.Width = 40;
-            timeScaleFixedInterval1.DisplayFormat = "mm";
+            timeScaleHour1.Enabled = false;
+            timeScaleHour1.Width = 38;
             timeScaleFixedInterval1.Enabled = false;
-            timeScaleFixedInterval1.Width = 25;
+            timeScaleFixedInterval1.Width = 35;
             this.schedu.Views.TimelineView.Scales.Add(timeScaleYear1);
             this.schedu.Views.TimelineView.Scales.Add(timeScaleQuarter1);
             this.schedu.Views.TimelineView.Scales.Add(timeScaleMonth1);
@@ -484,7 +475,7 @@ namespace QLSX
             this.schedu.Views.TimelineView.Scales.Add(timeScaleDay1);
             this.schedu.Views.TimelineView.Scales.Add(timeScaleHour1);
             this.schedu.Views.TimelineView.Scales.Add(timeScaleFixedInterval1);
-            this.schedu.Views.TimelineView.WorkTime.End = System.TimeSpan.Parse("17:00:00");
+            this.schedu.Views.TimelineView.WorkTime.End = System.TimeSpan.Parse("18:00:00");
             this.schedu.Views.TimelineView.WorkTime.Start = System.TimeSpan.Parse("07:00:00");
             this.schedu.Views.WorkWeekView.ResourcesPerPage = 5;
             this.schedu.Views.WorkWeekView.ShowFullWeek = true;
@@ -521,11 +512,7 @@ namespace QLSX
             this.bHeight,
             this.bResource,
             this.barButtonItem1,
-            this.bTugio,
-            this.bDengio,
-            this.chkShowWork,
-            this.barButtonItem2,
-            this.chkWorkDay});
+            this.barButtonItem2});
             this.ribbonControl2.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl2.MaxItemId = 22;
             this.ribbonControl2.Name = "ribbonControl2";
@@ -641,13 +628,6 @@ namespace QLSX
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
-            // bTugio
-            // 
-            this.bTugio.Caption = "Từ giờ";
-            this.bTugio.Edit = this.tTugio;
-            this.bTugio.Id = 16;
-            this.bTugio.Name = "bTugio";
-            // 
             // tTugio
             // 
             this.tTugio.AutoHeight = false;
@@ -660,13 +640,6 @@ namespace QLSX
             this.tTugio.Mask.EditMask = "hh:mm tt";
             this.tTugio.Name = "tTugio";
             // 
-            // bDengio
-            // 
-            this.bDengio.Caption = "Đến giờ";
-            this.bDengio.Edit = this.tDengio;
-            this.bDengio.Id = 17;
-            this.bDengio.Name = "bDengio";
-            // 
             // tDengio
             // 
             this.tDengio.AutoHeight = false;
@@ -674,27 +647,12 @@ namespace QLSX
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.tDengio.Name = "tDengio";
             // 
-            // chkShowWork
-            // 
-            this.chkShowWork.Caption = "Chỉ hiện thị giờ làm";
-            this.chkShowWork.Id = 18;
-            this.chkShowWork.Name = "chkShowWork";
-            this.chkShowWork.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.chkShowWork_CheckedChanged);
-            // 
             // barButtonItem2
             // 
             this.barButtonItem2.Caption = "Lịch làm việc\r\n";
             this.barButtonItem2.Id = 19;
             this.barButtonItem2.Name = "barButtonItem2";
             this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
-            // 
-            // chkWorkDay
-            // 
-            this.chkWorkDay.Caption = "Làm thứ 7";
-            this.chkWorkDay.Checked = true;
-            this.chkWorkDay.Id = 21;
-            this.chkWorkDay.Name = "chkWorkDay";
-            this.chkWorkDay.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.chkWorkDay_CheckedChanged);
             // 
             // ribbonPage4
             // 
@@ -727,8 +685,7 @@ namespace QLSX
             // ribbonPage6
             // 
             this.ribbonPage6.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1,
-            this.ribbonPageGroup2});
+            this.ribbonPageGroup1});
             this.ribbonPage6.Name = "ribbonPage6";
             this.ribbonPage6.Text = "Tùy chọn";
             // 
@@ -739,15 +696,6 @@ namespace QLSX
             this.ribbonPageGroup1.ItemLinks.Add(this.bResource);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = " ";
-            // 
-            // ribbonPageGroup2
-            // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.bTugio);
-            this.ribbonPageGroup2.ItemLinks.Add(this.bDengio);
-            this.ribbonPageGroup2.ItemLinks.Add(this.chkShowWork);
-            this.ribbonPageGroup2.ItemLinks.Add(this.chkWorkDay);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "Giờ làm việc";
             // 
             // repositoryItemSpinEdit1
             // 
@@ -927,7 +875,7 @@ namespace QLSX
             this.controlContainer1.Size = new System.Drawing.Size(1251, 114);
             this.controlContainer1.TabIndex = 13;
             // 
-            // fLichSX
+            // fLichSXView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1302, 688);
@@ -937,7 +885,7 @@ namespace QLSX
             this.Controls.Add(this.dockPanel1);
             this.Controls.Add(this.dockPanel3);
             this.Controls.Add(this.hideContainerRight);
-            this.Name = "fLichSX";
+            this.Name = "fLichSXView";
             this.Load += new System.EventHandler(this.fLichSX_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -1053,16 +1001,11 @@ namespace QLSX
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.Utils.ImageCollection imageCollection1;
-        private DevExpress.XtraBars.BarEditItem bTugio;
         private DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit repositoryItemTimeEdit1;
-        private DevExpress.XtraBars.BarEditItem bDengio;
         private DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit tTugio;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraScheduler.UI.RepositoryItemDuration repositoryItemDuration1;
         private DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit tDengio;
-        private DevExpress.XtraBars.BarCheckItem chkShowWork;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarCheckItem chkWorkDay;
 
         //private QLSX.CBABTPDataSetTableAdapters.DmMInTableAdapter dmMInTableAdapter;
     }

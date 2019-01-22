@@ -6,14 +6,17 @@ using System.Data;
 using DevExpress.XtraScheduler;
 using DevExpress.XtraScheduler.UI;
 using CDTDatabase;
+using CDTLib;
 namespace QLSX
 {
     public class LSXappoint : Appointment
     {
         DataRow _dr;
-        internal LSXappoint(SchedulerControl schedu, DataRow __dr):base(AppointmentType.Normal)
+        DataTable ctTangCa;
+        internal LSXappoint(SchedulerControl schedu, DataRow __dr, ref DataTable _ctTangca):base(AppointmentType.Normal)
         {
-           // this = schedu.Storage.CreateAppointment(AppointmentType.Normal);
+            // this = schedu.Storage.CreateAppointment(AppointmentType.Normal);
+            ctTangCa = _ctTangca;
             dr = __dr;
             // this.CustomFields["ctID"] = ctLichSXID.ToString();
            
@@ -41,17 +44,20 @@ namespace QLSX
                     ctLichSXID = Guid.Parse(dr["ctLichSXID"].ToString());
                 }
                 MTLSXID = Guid.Parse(dr["MTLSXID"].ToString());
-               DTLSXID = Guid.Parse(dr["DTLSXID"].ToString());
+                DTLSXID = Guid.Parse(dr["DTLSXID"].ToString());
                 CTLSXID = Guid.Parse(dr["CTLSXID"].ToString());
                 TuNgayKH = DateTime.Parse(dr["TuNgayKH"].ToString());
-                DenNgayKH = DateTime.Parse(dr["DenNgayKH"].ToString());
+                TongSoGioKH = double.Parse(dr["TongSoGioKH"].ToString());
+                //DenNgayKH = DateTime.Parse(dr["DenNgayKH"].ToString());
                 TenHang = dr["TenHang"].ToString();
                 SoLuong = decimal.Parse(dr["SoLuong"].ToString());
+                SLDaNhap = decimal.Parse(dr["SLDaNhap"].ToString());
                 SoCT = dr["SoCT"].ToString();
                 TenKH = dr["TenKH"].ToString();
                 NgayGiao = DateTime.Parse(dr["NgayGiao"].ToString());
                 Description1 = dr["Description1"].ToString();
                 TrangThai = int.Parse(dr["TrangThai"].ToString());
+                
             }
         }
         DateTime _tungayKH;
@@ -83,7 +89,9 @@ namespace QLSX
             set
             {
                 _tungayKH = value;
-                if (_durationKH != null) _denngayKH = _tungayKH + _durationKH;
+                if (_durationKH != null)
+                    _denngayKH = CalculateDenNgay(_tungayKH, _durationKH);
+                TrangThai = _trangthai;
             }
         }
         public DateTime DenNgayKH
@@ -92,10 +100,7 @@ namespace QLSX
             set
             {
                 _denngayKH = value;
-                if (_durationKH != _denngayKH - _tungayKH)
-                {
-                    DurationKH = _denngayKH - _tungayKH;                    
-                }
+               
             }
         }
         TimeSpan _durationKH;
@@ -111,11 +116,157 @@ namespace QLSX
                 if (_durationKH != value)
                 {
                     _durationKH = value;
-                    
-                    SoGioKH = _durationKH.Hours;
-                    SoPhutKH = _durationKH.Minutes;
-                    DenNgayKH= _tungayKH + _durationKH;
+                    //Viết lại
+                    _sogioKH = _durationKH.Hours +_durationKH.Days*24;
+                    _sophutKH = _durationKH.Minutes;
+                   
                 }
+            }
+        }
+
+        private DateTime CalculateDenNgay(DateTime bDate, TimeSpan dura)
+        {
+            DateTime eDate = bDate;
+
+            while (dura.TotalMinutes > 0)
+            {
+
+                DateTime bLunch = DateTime.Parse(bDate.ToShortDateString() + " " + Config.GetValue("TimeStartLunch").ToString() + ":00");
+                DateTime eLunch = DateTime.Parse(bDate.ToShortDateString() + " " + Config.GetValue("TimeEndLunch").ToString() + ":00");
+                DateTime bWork = DateTime.Parse(bDate.ToShortDateString() + " " + Config.GetValue("TimeStart").ToString() + ":00");
+                DateTime eWork = DateTime.Parse(bDate.ToShortDateString() + " " + Config.GetValue("TimeEnd").ToString() + ":00");
+                if (bDate.DayOfWeek == DayOfWeek.Saturday)// thứ 7
+                {
+                    if (Config.GetValue("SatudayWork").ToString() == "0")//Nghỉ cả ngày
+                    {
+                        bLunch = bWork; eLunch = bWork; eWork = bWork;
+                    }
+                    else if (Config.GetValue("SatudayWork").ToString() == "1")//làm nữa ngày
+                    {
+                        eLunch = bLunch; eWork = bLunch;
+                    }
+                }
+                if (bDate.DayOfWeek == DayOfWeek.Sunday)// Chủ nhật
+                {
+                    bLunch = bWork; eLunch = bWork; eWork = bWork;
+                }
+                if (bDate < bWork)//Trường hợp bắt đầu từ sáng sớm
+                {
+                    bDate = eWork.AddDays(-1);
+                    continue;
+                }
+                if (bDate <= bLunch)//Bắt đầu trong buổi sáng
+                {
+                    if (dura.TotalMinutes <= (bLunch - bDate).TotalMinutes)// Bắt đầu vào buồi sáng, kết thúc vào buổi sáng
+                    {
+                        eDate = bDate.AddMinutes(dura.TotalMinutes);
+                        return eDate;
+                    }
+                    else //Không thể kết thúc trong buổi sáng
+                    {
+                        //Tìm tăng ca buổi trưa
+                        dura = dura.Add(bDate - bLunch);
+                        bDate = bLunch;
+                        DataRow[] drTangcaLunch = ctTangCa.Select("isLunch=1 and ngay='" + bDate.ToShortDateString() + "'");
+                        if (drTangcaLunch.Length > 0)//có tăng ca
+                        {
+                            if (dura.TotalMinutes <= double.Parse(drTangcaLunch[0]["Sogio"].ToString()) * 60)//Kết thúc trong buổi trưa
+                            {
+                                eDate = bDate.Add(dura);
+                                return eDate;
+                            }
+                            else//qua buổi chiều
+                            {
+                                dura = dura.Add(bDate - bDate.AddMinutes(double.Parse(drTangcaLunch[0]["Sogio"].ToString()) * 60));
+                                bDate = eLunch;
+                            }
+                        }
+                        bDate = eLunch;
+                    }
+                }
+                if (bDate <= eWork)// Bắt đầu trong buổi chiều
+                {
+                    if (dura.TotalMinutes <= (eWork - bDate).TotalMinutes)//Kết thúc trong buổi chiều
+                    {
+                        eDate = bDate.Add(dura);
+                        return eDate;
+                    }
+                    else//Kéo vào buổi tối
+                    {
+                        dura = dura.Add(bDate - eWork);
+                        bDate = eWork;
+                    }
+                }
+                if (bDate < bWork.AddDays(1))
+                {
+                    DataRow[] drTangCaNight = ctTangCa.Select("isNight=1 and ngay='" + bDate.ToShortDateString() + "'");
+                    if (drTangCaNight.Length > 0)
+                    {
+                        if (dura.TotalMinutes <= double.Parse(drTangCaNight[0]["Sogio"].ToString()) * 60)//Ket thuc trong dem
+                        {
+                            eDate = bDate.Add(dura);
+                            return eDate;
+                        }
+                        else//qua hom sau
+                        {
+                            dura = dura.Add(bDate - bDate.AddMinutes(double.Parse(drTangCaNight[0]["Sogio"].ToString()) * 60));
+                        }
+                    }
+                    bDate = bWork.AddDays(1);
+
+                }
+
+
+
+            }
+            return eDate;
+        }
+
+        TimeSpan _durationTT;
+        public TimeSpan DurationTT
+        {
+            get
+            {
+                return _durationTT;
+            }
+            set
+            {
+                if (_durationTT != value)
+                {
+                    _durationTT = value;
+                    //Viết lại
+                    SoGio = _durationTT.Hours;
+                    SoPhut = _durationTT.Minutes;
+                    DenNgay = CalculateDenNgay(TuNgay, DurationTT);
+                }
+            }
+        }
+        double _TongSoGioKH;
+        double _TongSoGio;
+        public double TongSoGioKH
+        {
+            get { return _TongSoGioKH; }
+            set
+            {
+                _TongSoGioKH = value;
+                _sogioKH = (int)TongSoGioKH ;
+                _sophutKH = (int)((TongSoGioKH - (double)SoGioKH) * 60);
+                _durationKH = new TimeSpan(_sogioKH, _sophutKH, 0);
+                _denngayKH = CalculateDenNgay(_tungayKH, _durationKH);
+                TrangThai = _trangthai;
+            }
+        }
+        public double TongSoGio
+        {
+            get { return _TongSoGio; }
+            set
+            {
+                _TongSoGio = value;
+                _sogio = (int)TongSoGio;
+                _sophut = (int)((TongSoGio - (double)SoGio) * 60);
+                _durationTT = new TimeSpan(_sogio, _sophut, 0);
+                _denngay = CalculateDenNgay(_tungay, _durationTT);
+                TrangThai = _trangthai;
             }
         }
         public int SoGioKH
@@ -126,7 +277,7 @@ namespace QLSX
                 if (_sogioKH != value)
                 {
                     _sogioKH = value;
-                    DurationKH = new TimeSpan(_sogioKH, _sophutKH, 0);
+                    TongSoGioKH = _sogioKH + (double)_sophutKH / 60;
                 }
             }
         }
@@ -138,7 +289,7 @@ namespace QLSX
                 if (_sophutKH != value)
                 {
                     _sophutKH = value;
-                    DurationKH = new TimeSpan(_sogioKH, _sophutKH, 0);
+                    TongSoGioKH = _sogioKH + (double)_sophutKH / 60;
                 }
             }
         }
@@ -149,7 +300,8 @@ namespace QLSX
             {
                 if (value < DateTime.Now) TuNgay = _tungay;
                 _tungay = value;
-                if (Duration != null) _denngay = _tungay + Duration;
+                if (_durationTT != null) 
+                        _denngay = CalculateDenNgay(_tungay, _durationTT);
             }
         }
         public DateTime DenNgay
@@ -157,13 +309,8 @@ namespace QLSX
             get { return _denngay; }
             set
             {
-                _denngayKH = value;
-                if (Duration != DenNgay - TuNgay)
-                {
-                    Duration = _denngay - _tungay;
-                    SoGio = Duration.Hours;
-                    SoPhut = Duration.Minutes;
-                }
+                _denngay = value;
+                
             }
         }
         int _sogioKH = 0;
@@ -177,7 +324,7 @@ namespace QLSX
             set
             {
                 _sogio = value;
-                Duration = new TimeSpan(_sogio, _sophut, 0);
+                TongSoGio = _sogio + (double)_sophut / 60;
             }
         }
         public int SoPhut
@@ -186,15 +333,39 @@ namespace QLSX
             set
             {
                 _sophut = value;
-                Duration = new TimeSpan(_sogio, _sophut, 0);
+                TongSoGio = _sogio + (double)_sophut / 60;
             }
         }
         public string TenHang { get; set; }
         public decimal SoLuong { get; set; }
+        public decimal SLDaNhap { get; set; }
         public string SoCT { get; set; }
         public string TenKH { get; set; }
         public DateTime NgayGiao { get; set; }
-        public int TrangThai { get; set; }
+        int _trangthai;
+        public int TrangThai
+        {
+            get { return _trangthai; }
+            set
+            {
+                _trangthai = value;
+                if (TrangThai == 0 || TrangThai == 3)
+                {
+                    Start = TuNgayKH;
+                    End = DenNgayKH;
+                }
+                else if (TrangThai == 1)
+                {
+                    Start = TuNgay;
+                    End = DenNgayKH;
+                }
+                else if (TrangThai == 2)
+                {
+                    Start = TuNgay;
+                    End = DenNgay;
+                }
+            }
+        }
         public void UpdateDr()
         {
             if (dr != null)
@@ -212,10 +383,10 @@ namespace QLSX
         {
             if (isNew)
             {
-                string sql = "insert into ctLichSX(CtLichSXID, MTLSXID, DTLSXID, CTLSXID,TungayKH,DenNgayKH, SoLuong, GhiChu,MaMIn, MaVT, TenHang, TrangThai) " +
-                    " values(@CtLichSXID, @MTLSXID, @DTLSXID,@CTLSXID,@TungayKH,@DenNgayKH, @SoLuong, @GhiChu,@MaMIn, @MaVT, @TenHang, @TrangThai)";
-                string[] fields = new string[] { "@CtLichSXID", "@MTLSXID", "@DTLSXID","@CTLSXID","@TungayKH","@DenNgayKH","@SoLuong","@GhiChu", "@MaMIn", "@MaVT","@TenHang","@TrangThai" };
-                object[] paras = new object[] { ctLichSXID, MTLSXID, DTLSXID, CTLSXID, TuNgayKH, DenNgayKH, SoLuong, GhiChu,MaMIn, MaVT, TenHang, TrangThai };
+                string sql = "insert into ctLichSX(CtLichSXID, MTLSXID, DTLSXID, CTLSXID,TungayKH,DenNgayKH,TongSoGioKH, SoLuong, GhiChu,MaMIn, MaVT, TenHang, TrangThai) " +
+                    " values(@CtLichSXID, @MTLSXID, @DTLSXID,@CTLSXID,@TungayKH,@DenNgayKH,@TongSoGioKH, @SoLuong, @GhiChu,@MaMIn, @MaVT, @TenHang, @TrangThai)";
+                string[] fields = new string[] { "@CtLichSXID", "@MTLSXID", "@DTLSXID","@CTLSXID","@TungayKH","@DenNgayKH","@TongSoGioKH","@SoLuong","@GhiChu", "@MaMIn", "@MaVT","@TenHang","@TrangThai" };
+                object[] paras = new object[] { ctLichSXID, MTLSXID, DTLSXID, CTLSXID, TuNgayKH, DenNgayKH, TongSoGioKH, SoLuong, GhiChu,MaMIn, MaVT, TenHang, TrangThai };
                 db.UpdateDatabyPara(sql, fields, paras);
                 if (!db.HasErrors)
                 {
@@ -230,10 +401,10 @@ namespace QLSX
             {
                 if (dr.RowState == DataRowState.Modified)
                 {
-                    string sql = " update  ctLichSX set  MTLSXID =@MTLSXID, DTLSXID=@DTLSXID, CTLSXID=@CTLSXID,TungayKH=@TungayKH,DenNgayKH=@DenNgayKH, SoLuong=@SoLuong, GhiChu=@GhiChu,MaMIn=@MaMIn, MaVT=@MaVT, TenHang=@TenHang, TrangThai=@TrangThai " +
+                    string sql = " update  ctLichSX set  MTLSXID =@MTLSXID, DTLSXID=@DTLSXID, CTLSXID=@CTLSXID,TungayKH=@TungayKH,DenNgayKH=@DenNgayKH,TongSoGioKH=@TongSoGioKH, SoLuong=@SoLuong, GhiChu=@GhiChu,MaMIn=@MaMIn, MaVT=@MaVT, TenHang=@TenHang, TrangThai=@TrangThai " +
                         " where CtlSXID=@CTLSXID";
-                    string[] fields = new string[] { "@CtLichSXID", "@MTLSXID", "@DTLSXID","@CTLSXID", "@TungayKH", "@DenNgayKH", "@SoLuong", "@GhiChu","@MaMIn", "@MaVT", "@TenHang", "@TrangThai" };
-                    object[] paras = new object[] { ctLichSXID, MTLSXID, DTLSXID, CTLSXID, TuNgayKH, DenNgayKH, SoLuong, GhiChu,MaMIn, MaVT, TenHang, TrangThai };
+                    string[] fields = new string[] { "@CtLichSXID", "@MTLSXID", "@DTLSXID","@CTLSXID", "@TungayKH", "@DenNgayKH","@TongSoGioKH", "@SoLuong", "@GhiChu","@MaMIn", "@MaVT", "@TenHang", "@TrangThai" };
+                    object[] paras = new object[] { ctLichSXID, MTLSXID, DTLSXID, CTLSXID, TuNgayKH, DenNgayKH,TongSoGioKH, SoLuong, GhiChu,MaMIn, MaVT, TenHang, TrangThai };
                     db.UpdateDatabyPara(sql, fields, paras);
                     if (!db.HasErrors)
                     {
@@ -247,7 +418,7 @@ namespace QLSX
                     return true;
             }
         }
-       
-        
+      
+
     }
 }

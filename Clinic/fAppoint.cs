@@ -16,15 +16,17 @@ namespace QLSX
     {
         LSXappoint _apt;
         public AppointmentFormController controller;
-        public fAppoint(SchedulerControl schedu, Appointment apt)
+        public fAppoint(SchedulerControl schedu, Appointment apt, bool isView)
         {
             InitializeComponent();
             _apt = apt as LSXappoint;
             gMayIn.Properties.DataSource = schedu.Storage.Resources.DataSource;
             Appointment ap = schedu.Storage.CreateAppointment(AppointmentType.Normal);
-            
+
             //controller = new AppointmentFormController(schedu,ap);
 
+            tbOk.Visible = !isView;
+          
         }
 
         private void fAppont_Load(object sender, EventArgs e)
@@ -36,6 +38,7 @@ namespace QLSX
             tMaVT.DataBindings.Add("Text", _apt, "MaVT");
             tTenHang.DataBindings.Add("Text", _apt, "TenHang");
             cSoluong.DataBindings.Add("EditValue", _apt, "SoLuong");
+            cSLDaNhap.DataBindings.Add("EditValue", _apt, "SLDaNhap");
             dTuNgayKH.DataBindings.Add("EditValue", _apt, "TuNgayKH");
             tTungayKH.DataBindings.Add("EditValue", _apt, "TuNgayKH");
             dDenNgayKH.DataBindings.Add("EditValue", _apt, "DenNgayKH");
@@ -54,6 +57,16 @@ namespace QLSX
             mDes.DataBindings.Add("Text", _apt, "Description1");
             mGhiChu.DataBindings.Add("Text", _apt, "GhiChu");
 
+            //disalbe
+            if (_apt.TrangThai > 0)
+            {
+                dTuNgayKH.Properties.ReadOnly = true;
+                tTungayKH.Properties.ReadOnly = true;
+                dDenNgayKH.Properties.ReadOnly = true;
+                tDenNgayKH.Properties.ReadOnly = true;
+                sSoGioKH.Properties.ReadOnly = true;
+                sSoPhutKH.Properties.ReadOnly = true;
+            }
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
