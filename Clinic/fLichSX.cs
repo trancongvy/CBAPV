@@ -15,8 +15,10 @@ using DevExpress.XtraScheduler.UI;
 using DevExpress.XtraEditors;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.Utils.Menu;
+using DevExpress.XtraScheduler.Drawing;
 namespace QLSX
 {
+   
     public partial class fLichSX : XtraForm
     {
         public fLichSX()
@@ -28,10 +30,118 @@ namespace QLSX
             sWidth.EditValueChanging += SWidth_EditValueChanging;
 
             sResource.EditValueChanging += SResource_EditValueChanging;
-           
+            schedu.CustomDrawTimeCell += Schedu_CustomDrawTimeCell;
+            
+            
         }
+        Color lightColor;
+        Color grayColor;
+        Resource res = null;
+        private void Schedu_CustomDrawTimeCell(object sender, CustomDrawObjectEventArgs e)
+        {
+            Color workColor;
+            //if (!chkShowWork.Checked) return;
+            
+           TimeCell Cellinfo = e.ObjectInfo as TimeCell;
 
-       
+            DateTime bLunch = DateTime.Parse(Cellinfo.Interval.Start.ToShortDateString() + " " + Config.GetValue("TimeStartLunch").ToString() + ":00");
+            DateTime eLunch = DateTime.Parse(Cellinfo.Interval.Start.ToShortDateString() + " " + Config.GetValue("TimeEndLunch").ToString() + ":00");
+            DateTime bWork = DateTime.Parse(Cellinfo.Interval.Start.ToShortDateString() + " " + Config.GetValue("TimeStart").ToString() + ":00");
+
+            DateTime eWork = DateTime.Parse(Cellinfo.Interval.Start.ToShortDateString() + " " + Config.GetValue("TimeEnd").ToString() + ":00");
+           
+            if (Cellinfo.Interval.Start.DayOfWeek == DayOfWeek.Saturday)
+            {
+                if (Config.GetValue("SatudayWork").ToString() == "0")
+                {
+                    bLunch = bWork; eLunch = bWork; eWork = bWork;
+                }
+                else if (Config.GetValue("SatudayWork").ToString() == "1")
+                {
+                    eLunch = bLunch; eWork = bLunch;
+                }
+            }
+            if (bWork.DayOfWeek == DayOfWeek.Sunday)// Chủ nhật
+            {
+                bLunch = bWork; eLunch = bWork; eWork = bWork;
+            }
+            string MayinCondition;
+           
+            if (Cellinfo.Resource.Id.GetType()==typeof(DevExpress.XtraScheduler.Native.EmptyResource))
+                MayinCondition = " MaMIn is null";
+            else
+                MayinCondition = " MaMIn='" + Cellinfo.Resource.Id.ToString() + "'";
+            DataRow[] dr = ctTangCa.Select("isLunch =1 and ngay='" + Cellinfo.Interval.Start.ToShortDateString() + "' and " +MayinCondition);
+            if (dr.Length > 0)
+            {
+                bLunch = bLunch.AddHours(double.Parse(dr[0]["Sogio"].ToString()));
+            }
+            dr = ctTangCa.Select("isNight=1 and ngay='" + Cellinfo.Interval.Start.ToShortDateString() + "' and " + MayinCondition);
+            if (dr.Length > 0)
+            {
+                double sogio = double.Parse(dr[0]["Sogio"].ToString()) ;
+                if (sogio < (DateTime.Parse(eWork.ToShortDateString()).AddDays(1) - eWork).TotalHours)
+                {
+                    eWork = eWork.AddHours(sogio);
+                }
+                else
+                {
+                    eWork = DateTime.Parse(eWork.ToShortDateString()).AddDays(1);
+                }
+            }
+            //if (Cellinfo != null && Cellinfo.Interval.Duration.Hours == 1 && Cellinfo.IsWorkTime)
+            //{//
+            //    lightColor = Color.White;//Cellinfo.Appearance.BackColor;//
+            //}
+            //else if (Cellinfo != null && Cellinfo.Interval.Duration.Hours == 1 && !Cellinfo.IsWorkTime)
+            //{
+            //    grayColor = Color.Gray;// ellinfo.Appearance.BackColor;
+            //}
+
+            //     Color.White;//
+
+            res = Cellinfo.Resource;
+            DateTime start = Cellinfo.Interval.Start;
+            if (schedu.Storage == null) return;
+            int idx = schedu.Storage.Resources.Items.IndexOf(Cellinfo.Resource);
+            if (idx == -1) return;
+            if (Cellinfo.Interval.Duration.Hours >= 1)
+            {
+                if ((start >= bWork && start < bLunch) || (start >= eLunch && start < eWork))
+                {
+
+                    Cellinfo.Appearance.BackColor = schedu.ResourceColorSchemas[idx].CellLight;
+                }
+                else
+                {
+                    Cellinfo.Appearance.BackColor = schedu.ResourceColorSchemas[idx].Cell;
+
+
+                }
+            }
+            else if (Cellinfo.Interval.Duration.Days == 1)
+            {
+                if (bWork < eWork)
+                    Cellinfo.Appearance.BackColor = schedu.ResourceColorSchemas[idx].CellLight;
+                else Cellinfo.Appearance.BackColor = schedu.ResourceColorSchemas[idx].Cell;
+            }
+            if(Cellinfo.Interval.Duration.Minutes >= 15)
+            {
+                if ((start >= bWork && start < bLunch) || (start >= eLunch && start < eWork))
+                {
+
+                    Cellinfo.Appearance.BackColor = schedu.ResourceColorSchemas[idx].CellLight;
+                }
+                else
+                {
+                    Cellinfo.Appearance.BackColor = schedu.ResourceColorSchemas[idx].Cell;
+
+
+                }
+            }
+
+
+            }
 
         Database dbdata = Database.NewDataDatabase();
         Database dbStrucst = Database.NewStructDatabase();
@@ -42,6 +152,7 @@ namespace QLSX
         DataTable ctTangCa;
         DataTable LSXChuaSapLich;
         BindingList<LSXappoint> ctLichSXBind=new BindingList<LSXappoint>();
+        TimeScaleCollection scales;
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             if (dateEdit1.EditValue == null || dateEdit1.EditValue == null) return;
@@ -74,12 +185,17 @@ namespace QLSX
             {
                 ctLichSXBind.Add(GenAppoint(dr));
             }
-            this.schedulerStorage1.Appointments.DataSource = ctLichSXBind; 
+            this.schedulerStorage1.Appointments.DataSource = ctLichSXBind;
+
+
+            ShowDefaultTimescale(!chkShowWork.Checked);
             this.schedulerStorage1.EndUpdate();
 
         }
         private void fLichSX_Load(object sender, EventArgs e)
         {
+            lightColor = Color.Black;
+            grayColor = Color.Black;
             dockManager1.BeginUpdate();
             DateTime bWork = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + Config.GetValue("TimeStart").ToString() + ":00");
             DateTime eWork = DateTime.Parse(DateTime.Now.ToShortDateString() + " " + Config.GetValue("TimeEnd").ToString() + ":00");
@@ -106,13 +222,17 @@ namespace QLSX
             schedu.QueryWorkTime += Schedu_QueryWorkTime;
             //Resource
 
-            dmMayin = dbdata.GetDataTable("select * from dmMin");
+            dmMayin = dbdata.GetDataTable("select * from dmMIn");
             dmMayin.TableName = "DmMIn";
             ds.Tables.Add(dmMayin);
             dmMInBindingSource.DataSource = ds;
-            dmMInBindingSource.DataMember = "DmMin";
+            dmMInBindingSource.DataMember = "DmMIn";
             //Schedu
-
+            scales = new TimeScaleCollection();
+            foreach (TimeScale scl in schedu.TimelineView.Scales)
+            {
+                scales.Add(scl);
+            }
             getData(dateEdit1.DateTime, dateEdit2.DateTime);
             //
            // ctLichSXBind = new BindingList<LSXappoint>();
@@ -137,7 +257,9 @@ namespace QLSX
             this.schedulerStorage1.Resources.Mappings.Image = "Hinh";
             this.schedulerStorage1.EndUpdate();
             schedu.GoToToday();
-           // getData(dateEdit1.DateTime, dateEdit2.DateTime);
+            
+            // getData(dateEdit1.DateTime, dateEdit2.DateTime);
+
         }
 
         private void Schedu_QueryWorkTime(object sender, QueryWorkTimeEventArgs e)
@@ -157,9 +279,20 @@ namespace QLSX
                     e.Cancel = true;
                     return;
                 }
-                if ((e.Object as Appointment).Start != apt.Start) apt.TuNgayKH = (e.Object as Appointment).Start;
-                (e.Object as Appointment).Start = apt.Start;
+                if((e.Object as Appointment).Start <= DateTime.Now)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                    if ((e.Object as Appointment).Start != apt.Start) apt.TuNgayKH = (e.Object as Appointment).Start;
+                if ((e.Object as Appointment).ResourceId != apt.ResourceId)
+                {
+                    apt.ResourceId= (e.Object as Appointment).ResourceId;
+                    apt.TuNgayKH = (e.Object as Appointment).Start;
+                }
+                    (e.Object as Appointment).Start = apt.Start;
                 (e.Object as Appointment).End = apt.End;
+                apt.UpdateDr();
                 //fAppoint fA = new fAppoint(schedu, apt, false);
                 
                 //if (fA.ShowDialog() == DialogResult.OK)
@@ -185,11 +318,42 @@ namespace QLSX
            
             List<LSXappoint> x = ctLichSXBind.ToList();
             if (e.Appointment.CustomFields["ctID"] == null) {
-                 e.Handled = false;
-                
-               // AppointmentForm f = new AppointmentForm(schedu, new Appointment());
-               // f.ShowDialog();
-                return; }
+                 e.Handled = true;
+                fTangca fTca;
+                if (schedu.SelectedInterval != null)
+                {
+                    fTca = new fTangca(schedu.SelectedInterval,schedu.SelectedResource);
+                }
+                else
+                {
+                    fTca = new fTangca(new TimeInterval(e.Appointment.Start, e.Appointment.End), null);
+                }
+                fTca.ctTangca = this.ctTangCa.Clone();
+                fTca.dmMIn = dmMayin;
+                if (fTca.ShowDialog() == DialogResult.OK)
+                {
+                    if (fTca.ctTangca.Rows.Count > 0)
+                    {
+                        DataRow dr = ctTangCa.NewRow();
+                        dr.ItemArray = (object[])fTca.ctTangca.Rows[0].ItemArray.Clone();
+                        ctTangCa.Rows.Add(dr);
+                        ctTangCa.AcceptChanges();
+                        //Tính lại DenNgayKH 
+                        foreach(LSXappoint apt1 in x)
+                        {
+                            apt1.ctTangCa = ctTangCa;
+                            if (apt1.TrangThai <2 ) //khởi tạo hoặc đang chạy
+                            {                               
+                                apt1.TongSoGioKH = apt1.TongSoGioKH;
+                                
+                            }
+                        }
+                        schedu.RefreshData();
+                    }
+                }
+                    return;
+
+            }
             else e.Handled = true;
             LSXappoint apt = x.Find(m => m.ctLichSXID.ToString() == e.Appointment.CustomFields["ctID"].ToString());
             if (apt != null) {
@@ -350,24 +514,39 @@ namespace QLSX
 
         private void chkShowWork_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            schedu.WorkWeekView.ShowWorkTimeOnly = chkShowWork.Checked;
+           
+                ShowDefaultTimescale(!chkShowWork.Checked);
+
 
         }
 
-        private void chkWorkDay_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ShowDefaultTimescale(bool isDefault)
         {
-            schedu.WorkDays.BeginUpdate();
-            schedu.WorkDays.Clear();
-            if (chkWorkDay.Checked)
+            schedu.TimelineView.Scales.Clear();
+            if (isDefault)
             {
-                schedu.WorkDays.Add(WeekDays.Monday | WeekDays.Tuesday | WeekDays.Wednesday| WeekDays.Thursday | WeekDays.Friday | WeekDays.Saturday);
+                schedu.TimelineView.Scales.AddRange(scales.ToList());
             }
             else
-            {
-                schedu.WorkDays.Add(WeekDays.Monday | WeekDays.Tuesday | WeekDays.Wednesday | WeekDays.Thursday | WeekDays.Friday );
+            { 
 
+                TimeScaleDay ts = new CustomTimeScaleDay(ctTangCa);
+                TimeScaleLessThanDay tsh = new TimeScaleLessThanDay(ctTangCa);
+                TimeScaleLessThanDayMinute tsm = new TimeScaleLessThanDayMinute(ctTangCa,new TimeSpan(0,15,0));
+                tsm.Enabled = false;
+                schedu.TimelineView.Scales.Add(scales[0]);
+                schedu.TimelineView.Scales.Add(scales[1]);
+                schedu.TimelineView.Scales.Add(scales[2]);
+                schedu.TimelineView.Scales.Add(scales[3]);
+                schedu.TimelineView.Scales.Add(scales[4]);
+                schedu.TimelineView.Scales.Add(tsh);
+                schedu.TimelineView.Scales.Add(tsm);
             }
-            schedu.WorkDays.EndUpdate();
+        }
+
+        private void bHeight_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
     }
 }

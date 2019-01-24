@@ -88,7 +88,6 @@ namespace QLSX
             this.tDengio = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
             this.chkShowWork = new DevExpress.XtraBars.BarCheckItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.chkWorkDay = new DevExpress.XtraBars.BarCheckItem();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -471,8 +470,8 @@ namespace QLSX
             timeScaleMonth1.DisplayFormat = "MM/yyyy";
             timeScaleMonth1.Enabled = false;
             timeScaleWeek1.DisplayFormat = "dddd,dd/MM/yy";
-            timeScaleDay1.DisplayFormat = "dd/MM";
-            timeScaleHour1.DisplayFormat = "hh:mm";
+            timeScaleDay1.DisplayFormat = "dd/MM ddd";
+            timeScaleHour1.DisplayFormat = "hh tt";
             timeScaleHour1.Width = 40;
             timeScaleFixedInterval1.DisplayFormat = "mm";
             timeScaleFixedInterval1.Enabled = false;
@@ -484,6 +483,7 @@ namespace QLSX
             this.schedu.Views.TimelineView.Scales.Add(timeScaleDay1);
             this.schedu.Views.TimelineView.Scales.Add(timeScaleHour1);
             this.schedu.Views.TimelineView.Scales.Add(timeScaleFixedInterval1);
+            this.schedu.Views.TimelineView.SelectionBar.Height = 20;
             this.schedu.Views.TimelineView.WorkTime.End = System.TimeSpan.Parse("17:00:00");
             this.schedu.Views.TimelineView.WorkTime.Start = System.TimeSpan.Parse("07:00:00");
             this.schedu.Views.WorkWeekView.ResourcesPerPage = 5;
@@ -524,8 +524,7 @@ namespace QLSX
             this.bTugio,
             this.bDengio,
             this.chkShowWork,
-            this.barButtonItem2,
-            this.chkWorkDay});
+            this.barButtonItem2});
             this.ribbonControl2.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl2.MaxItemId = 22;
             this.ribbonControl2.Name = "ribbonControl2";
@@ -550,7 +549,7 @@ namespace QLSX
             // 
             // imageCollection1
             // 
-            this.imageCollection1.ImageSize = new System.Drawing.Size(128, 128);
+            this.imageCollection1.ImageSize = new System.Drawing.Size(94, 58);
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
             // 
             // barButtonItem5
@@ -609,6 +608,7 @@ namespace QLSX
             this.bHeight.Id = 12;
             this.bHeight.ImageIndex = 1;
             this.bHeight.Name = "bHeight";
+            this.bHeight.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bHeight_ItemClick);
             // 
             // sHeight
             // 
@@ -688,14 +688,6 @@ namespace QLSX
             this.barButtonItem2.Name = "barButtonItem2";
             this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
             // 
-            // chkWorkDay
-            // 
-            this.chkWorkDay.Caption = "Làm thứ 7";
-            this.chkWorkDay.Checked = true;
-            this.chkWorkDay.Id = 21;
-            this.chkWorkDay.Name = "chkWorkDay";
-            this.chkWorkDay.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.chkWorkDay_CheckedChanged);
-            // 
             // ribbonPage4
             // 
             this.ribbonPage4.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -745,7 +737,6 @@ namespace QLSX
             this.ribbonPageGroup2.ItemLinks.Add(this.bTugio);
             this.ribbonPageGroup2.ItemLinks.Add(this.bDengio);
             this.ribbonPageGroup2.ItemLinks.Add(this.chkShowWork);
-            this.ribbonPageGroup2.ItemLinks.Add(this.chkWorkDay);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Giờ làm việc";
             // 
@@ -1062,7 +1053,6 @@ namespace QLSX
         private DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit tDengio;
         private DevExpress.XtraBars.BarCheckItem chkShowWork;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarCheckItem chkWorkDay;
 
         //private QLSX.CBABTPDataSetTableAdapters.DmMInTableAdapter dmMInTableAdapter;
     }

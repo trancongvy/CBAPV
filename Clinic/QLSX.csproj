@@ -81,17 +81,17 @@
     <Compile Include="fAppoint.Designer.cs">
       <DependentUpon>fAppoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="fLichSXView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fLichSXView.Designer.cs">
-      <DependentUpon>fLichSXView.cs</DependentUpon>
-    </Compile>
     <Compile Include="fNhapTP.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fNhapTP.Designer.cs">
       <DependentUpon>fNhapTP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fTangca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTangca.Designer.cs">
+      <DependentUpon>fTangca.cs</DependentUpon>
     </Compile>
     <Compile Include="fTaoPhieuXuatLSX.cs">
       <SubType>Form</SubType>
@@ -123,14 +123,14 @@
     <EmbeddedResource Include="fAppoint.resx">
       <DependentUpon>fAppoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fLichSXView.resx">
-      <DependentUpon>fLichSXView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="fLichSX.resx">
       <DependentUpon>fLichSX.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fNhapTP.resx">
       <DependentUpon>fNhapTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTangca.resx">
+      <DependentUpon>fTangca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fTaoPhieuXuatLSX.resx">
       <DependentUpon>fTaoPhieuXuatLSX.cs</DependentUpon>
