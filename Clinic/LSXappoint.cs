@@ -57,6 +57,10 @@ namespace QLSX
                 TenKH = dr["TenKH"].ToString();
                 NgayGiao = DateTime.Parse(dr["NgayGiao"].ToString());
                 Description1 = dr["Description1"].ToString();
+                if (dr["TuNgay"] != DBNull.Value) TuNgay = DateTime.Parse(dr["TuNgay"].ToString());
+                if (dr["DenNgay"] == DBNull.Value) DenNgay = TuNgay;
+                else
+                    DenNgay = DateTime.Parse(dr["DenNgay"].ToString());
                 TrangThai = int.Parse(dr["TrangThai"].ToString());
 
             }
@@ -300,10 +304,10 @@ namespace QLSX
             get { return _tungay; }
             set
             {
-                if (value < DateTime.Now) TuNgay = _tungay;
+               // if (value < DateTime.Now) TuNgay = _tungay;
                 _tungay = value;
-                if (_durationTT != null)
-                    CalculateDenNgay(ref _tungay, ref _denngay, _durationTT);
+               // if (_durationTT != null)
+                //    CalculateDenNgay(ref _tungay, ref _denngay, _durationTT);
             }
         }
         public DateTime DenNgay
