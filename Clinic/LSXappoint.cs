@@ -363,7 +363,10 @@ namespace QLSX
                 else if (TrangThai == 1)
                 {
                     Start = TuNgay;
-                    End = DenNgayKH;
+                    if (DenNgayKH > TuNgay)
+                        End = DenNgayKH;
+                    //else
+                      //  End = TuNgay;
                 }
                 else if (TrangThai == 2)
                 {

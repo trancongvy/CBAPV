@@ -54,9 +54,9 @@
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -75,16 +75,18 @@
             // 
             this.panelControl2.Controls.Add(this.btUpdate);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 411);
+            this.panelControl2.Location = new System.Drawing.Point(0, 790);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1178, 51);
+            this.panelControl2.Size = new System.Drawing.Size(2356, 98);
             this.panelControl2.TabIndex = 1;
             // 
             // btUpdate
             // 
-            this.btUpdate.Location = new System.Drawing.Point(462, 15);
+            this.btUpdate.Location = new System.Drawing.Point(924, 29);
+            this.btUpdate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btUpdate.Size = new System.Drawing.Size(150, 44);
             this.btUpdate.TabIndex = 0;
             this.btUpdate.Text = "Update";
             this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
@@ -96,37 +98,41 @@
             this.panelControl1.Controls.Add(this.gridLookUpEdit1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1178, 50);
+            this.panelControl1.Size = new System.Drawing.Size(2356, 96);
             this.panelControl1.TabIndex = 0;
             this.panelControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl1_Paint);
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(462, 10);
+            this.simpleButton1.Location = new System.Drawing.Point(924, 19);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(92, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(184, 44);
             this.simpleButton1.TabIndex = 2;
             this.simpleButton1.Text = "Export Excel";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // tbGet
             // 
-            this.tbGet.Location = new System.Drawing.Point(299, 10);
+            this.tbGet.Location = new System.Drawing.Point(598, 19);
+            this.tbGet.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbGet.Name = "tbGet";
-            this.tbGet.Size = new System.Drawing.Size(92, 23);
+            this.tbGet.Size = new System.Drawing.Size(184, 44);
             this.tbGet.TabIndex = 1;
             this.tbGet.Text = "Get data";
             this.tbGet.Click += new System.EventHandler(this.tbGet_Click);
             // 
             // gridLookUpEdit1
             // 
-            this.gridLookUpEdit1.Location = new System.Drawing.Point(107, 13);
+            this.gridLookUpEdit1.Location = new System.Drawing.Point(214, 25);
+            this.gridLookUpEdit1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gridLookUpEdit1.Name = "gridLookUpEdit1";
             this.gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.gridLookUpEdit1.Properties.View = this.gridLookUpEdit1View;
-            this.gridLookUpEdit1.Size = new System.Drawing.Size(139, 20);
+            this.gridLookUpEdit1.Size = new System.Drawing.Size(278, 32);
             this.gridLookUpEdit1.TabIndex = 0;
             // 
             // gridLookUpEdit1View
@@ -140,20 +146,23 @@
             // 
             this.panelControl3.Controls.Add(this.gridControl1);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl3.Location = new System.Drawing.Point(0, 50);
+            this.panelControl3.Location = new System.Drawing.Point(0, 96);
+            this.panelControl3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1178, 361);
+            this.panelControl3.Size = new System.Drawing.Size(2356, 694);
             this.panelControl3.TabIndex = 2;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gridControl1.Location = new System.Drawing.Point(2, 2);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCalcEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(1174, 357);
+            this.gridControl1.Size = new System.Drawing.Size(2352, 690);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -294,7 +303,7 @@
             this.gridColumn8.FieldName = "bookstock";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.VisibleIndex = 9;
             this.gridColumn8.Width = 78;
             // 
             // gridColumn9
@@ -307,7 +316,7 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.OptionsColumn.AllowEdit = false;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 9;
+            this.gridColumn9.VisibleIndex = 10;
             this.gridColumn9.Width = 101;
             // 
             // gridColumn10
@@ -348,10 +357,6 @@
             this.gridColumn13.VisibleIndex = 12;
             this.gridColumn13.Width = 108;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // gridColumn15
             // 
             this.gridColumn15.Caption = "Number of Ship";
@@ -365,21 +370,26 @@
             // 
             // gridColumn16
             // 
-            this.gridColumn16.Caption = "Stock Focus";
-            this.gridColumn16.FieldName = "MaVT2";
+            this.gridColumn16.Caption = "Valid for";
+            this.gridColumn16.FieldName = "RFMprintMT29";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 10;
+            this.gridColumn16.VisibleIndex = 8;
             this.gridColumn16.Width = 71;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // ChkStock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 462);
+            this.ClientSize = new System.Drawing.Size(2356, 888);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "ChkStock";
             this.Text = "ChkStock";
             this.Load += new System.EventHandler(this.ChkStock_Load);

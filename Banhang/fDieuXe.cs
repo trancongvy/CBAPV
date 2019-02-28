@@ -121,7 +121,7 @@ namespace Banhang
                 if (dbdata.HasErrors)
                 {
                     dbdata.RollbackMultiTrans();
-                    MessageBox.Show("Lỗi");
+                    MessageBox.Show("Lỗi 1");
                     dbdata.HasErrors = false;
                     return;
                 }
@@ -137,19 +137,20 @@ namespace Banhang
                         {
                             dbdata.RollbackMultiTrans();
                             dbdata.HasErrors = false;
-                            MessageBox.Show("Lỗi");
+                            MessageBox.Show("Lỗi 2");
                             return;
                         }
 
                     }
                     if (!dbdata.HasErrors)
                     {
+
                         dbdata.UpdateDatabyStore("TaoPhieuXuatTuMT38", new string[] { "@MT38ID" }, new object[] { ID });
                         if (dbdata.HasErrors)
                         {
                             dbdata.RollbackMultiTrans();
                             dbdata.HasErrors = false;
-                            MessageBox.Show("Lỗi");
+                            MessageBox.Show("Lỗi 3");
                             return;
                         }
                         else
