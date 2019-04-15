@@ -41,7 +41,7 @@ namespace Piriou
         private void tbGet_Click(object sender, EventArgs e)
         {
             if (gridLookUpEdit1.EditValue == null) return;
-            tb = db.GetDataSetByStore("GetPoNumber", new string[] {"@puric" }, new object[] { gridLookUpEdit1.EditValue.ToString()});
+            tb = db.GetDataSetByStore("GetPROPoNumber", new string[] {"@puric" }, new object[] { gridLookUpEdit1.EditValue.ToString()});
             if (tb == null) return;
             gridControl1.DataSource = tb;
         }
@@ -55,7 +55,9 @@ namespace Piriou
             foreach (int j in i)
             {
                 DataRow dr = gridView1.GetDataRow(j);
-                dr["PoNo"] = tPONo.Text;
+                if (tPONo.Text.Trim() != string.Empty)
+                    dr["PoNo"] = tPONo.Text;
+                
                 dr.EndEdit();
             }
         }
@@ -68,18 +70,45 @@ namespace Piriou
             {
                 foreach (DataRow dr in tb.Rows)
                 {
-                    if (dr["Pono"] == DBNull.Value) continue;
-                    string upsql = "update dt29 set ";
-                    upsql += " PONo='" + dr["PONo"].ToString() + "'";
-                    upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
-                    db.UpdateByNonQuery(upsql);
-                    if (db.HasErrors)
+                    if (dr["Pono"] != DBNull.Value && dr["Pono"].ToString().Trim()!=string.Empty)
                     {
-                        db.RollbackMultiTrans();
-                        MessageBox.Show("Can not update, error occur");
-                        return;
+                        string upsql = "update dt29 set ";
+                        upsql += " PONo='" + dr["PONo"].ToString() + "'";
+                        upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
+                        db.UpdateByNonQuery(upsql);
+                        if (db.HasErrors)
+                        {
+                            db.RollbackMultiTrans();
+                            MessageBox.Show("Can not update, error occur");
+                            return;
+                        }
                     }
-
+                    if (dr["Provider"] != DBNull.Value && dr["Pono"].ToString().Trim() != string.Empty)
+                    {
+                        string upsql = "update dt29 set ";
+                        upsql += " Provider='" + dr["Provider"].ToString() + "'";
+                        upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
+                        db.UpdateByNonQuery(upsql);
+                        if (db.HasErrors)
+                        {
+                            db.RollbackMultiTrans();
+                            MessageBox.Show("Can not update, error occur");
+                            return;
+                        }
+                    }
+                    if (dr["QtyDiff"] != DBNull.Value && dr["QtyDiff"].ToString().Trim() != string.Empty )
+                    {
+                        string upsql = "update dt29 set ";
+                        upsql += " QtyDiff='" + dr["QtyDiff"].ToString() + "'";
+                        upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
+                        db.UpdateByNonQuery(upsql);
+                        if (db.HasErrors)
+                        {
+                            db.RollbackMultiTrans();
+                            MessageBox.Show("Can not update, error occur");
+                            return;
+                        }
+                    }
                 }
             }
             catch
@@ -93,6 +122,19 @@ namespace Piriou
                 else db.RollbackMultiTrans();
             }
             tbGet_Click(sender, e);
+        }
+
+        private void simpleButton1_Click_1(object sender, EventArgs e)
+        {
+            if (tPONo.Text == string.Empty) return;
+            int[] i = gridView1.GetSelectedRows();
+            foreach (int j in i)
+            {
+                DataRow dr = gridView1.GetDataRow(j);
+                if (tProvider.Text.Trim() != string.Empty)
+                    dr["Provider"] = tProvider.Text;
+                dr.EndEdit();
+            }
         }
     }
 }
