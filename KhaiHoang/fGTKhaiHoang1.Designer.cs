@@ -46,6 +46,7 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).BeginInit();
@@ -65,33 +66,37 @@
             this.panelControl1.Controls.Add(this.spinEdit1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1007, 57);
+            this.panelControl1.Size = new System.Drawing.Size(2014, 110);
             this.panelControl1.TabIndex = 0;
             this.panelControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.panelControl1_Paint);
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(549, 12);
+            this.simpleButton1.Location = new System.Drawing.Point(1098, 23);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(108, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(216, 44);
             this.simpleButton1.TabIndex = 11;
             this.simpleButton1.Text = "Tính giá thành";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(231, 12);
+            this.labelControl2.Location = new System.Drawing.Point(462, 23);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(49, 13);
+            this.labelControl2.Size = new System.Drawing.Size(96, 25);
             this.labelControl2.TabIndex = 10;
             this.labelControl2.Text = "đến tháng";
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(47, 12);
+            this.labelControl1.Location = new System.Drawing.Point(94, 23);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(44, 13);
+            this.labelControl1.Size = new System.Drawing.Size(86, 25);
             this.labelControl1.TabIndex = 9;
             this.labelControl1.Text = "Từ tháng";
             // 
@@ -103,7 +108,8 @@
             0,
             0});
             this.spinEdit2.EnterMoveNextControl = true;
-            this.spinEdit2.Location = new System.Drawing.Point(301, 12);
+            this.spinEdit2.Location = new System.Drawing.Point(602, 23);
+            this.spinEdit2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.spinEdit2.Name = "spinEdit2";
             this.spinEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -121,7 +127,7 @@
             0,
             0,
             0});
-            this.spinEdit2.Size = new System.Drawing.Size(66, 20);
+            this.spinEdit2.Size = new System.Drawing.Size(132, 32);
             this.spinEdit2.TabIndex = 8;
             // 
             // spinEdit1
@@ -132,7 +138,8 @@
             0,
             0});
             this.spinEdit1.EnterMoveNextControl = true;
-            this.spinEdit1.Location = new System.Drawing.Point(119, 12);
+            this.spinEdit1.Location = new System.Drawing.Point(238, 23);
+            this.spinEdit1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.spinEdit1.Name = "spinEdit1";
             this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -150,23 +157,25 @@
             0,
             0,
             0});
-            this.spinEdit1.Size = new System.Drawing.Size(62, 20);
+            this.spinEdit1.Size = new System.Drawing.Size(124, 32);
             this.spinEdit1.TabIndex = 7;
             // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.simpleButton2);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 482);
+            this.panelControl2.Location = new System.Drawing.Point(0, 927);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1007, 75);
+            this.panelControl2.Size = new System.Drawing.Size(2014, 144);
             this.panelControl2.TabIndex = 1;
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(795, 28);
+            this.simpleButton2.Location = new System.Drawing.Point(1590, 54);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(108, 23);
+            this.simpleButton2.Size = new System.Drawing.Size(216, 44);
             this.simpleButton2.TabIndex = 12;
             this.simpleButton2.Text = "Cập nhật giá";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -174,10 +183,12 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 57);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Location = new System.Drawing.Point(0, 110);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1007, 425);
+            this.gridControl1.Size = new System.Drawing.Size(2014, 817);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -189,6 +200,7 @@
             this.gridColumn2,
             this.gridColumn8,
             this.gridColumn3,
+            this.gridColumn9,
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
@@ -253,7 +265,7 @@
             this.gridColumn4.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "CP622", "{0:### ### ### ##0}")});
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
             this.gridColumn4.Width = 104;
             // 
             // gridColumn5
@@ -266,7 +278,7 @@
             this.gridColumn5.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "CP627", "{0:### ### ### ##0}")});
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.VisibleIndex = 6;
             this.gridColumn5.Width = 104;
             // 
             // gridColumn6
@@ -279,7 +291,7 @@
             this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TongCP", "{0:### ### ### ##0}")});
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.VisibleIndex = 7;
             this.gridColumn6.Width = 104;
             // 
             // gridColumn7
@@ -290,17 +302,30 @@
             this.gridColumn7.FieldName = "Gia";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.VisibleIndex = 8;
             this.gridColumn7.Width = 118;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Chi phí 6212";
+            this.gridColumn9.DisplayFormat.FormatString = "### ### ### ### ##0";
+            this.gridColumn9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn9.FieldName = "CP6212";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "CP6212", "{0:### ### ### ##0}")});
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 4;
             // 
             // fGTKhaiHoang1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 557);
+            this.ClientSize = new System.Drawing.Size(2014, 1071);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "fGTKhaiHoang1";
             this.Text = "Tính giá thành giai đoạn 1 (Kg->Ram)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -338,6 +363,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
-
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }

@@ -15,14 +15,14 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 namespace Piriou
 {
-    public partial class ChkStock : XtraForm
+    public partial class ChkStockCutof : XtraForm
     {
 
         Database db = Database.NewDataDatabase();
         Database dbStr = Database.NewStructDatabase();
         DataTable PurList;
         DataTable tb;
-        public ChkStock()
+        public ChkStockCutof()
         {
             InitializeComponent();
             
@@ -30,7 +30,7 @@ namespace Piriou
 
         private void ChkStock_Load(object sender, EventArgs e)
         {
-            string sql = "select MaKH, TenKH, Department, Leve from dmkh where Department='Warehouse' ";
+            string sql = "select MaKH, TenKH, Department, Leve from dmkh where SelectCode3='PRE' ";
             PurList = db.GetDataTable(sql);
             gridLookUpEdit1.Properties.DataSource = PurList;
             gridLookUpEdit1.Properties.ValueMember = "MaKH";
@@ -43,7 +43,7 @@ namespace Piriou
         {
            // if (gridLookUpEdit1.EditValue == null || gridLookUpEdit1.EditValue.ToString() == "") return;
 
-            tb = db.GetDataSetByStore("GetCheckStock", new string[] { }, new object[] { });
+            tb = db.GetDataSetByStore("GetCheckStockCutoff", new string[] { }, new object[] { });
             if (tb == null) return;
             tb.ColumnChanged += Tb_ColumnChanged;
             tb.ColumnChanging += tb_ColumnChanging;
@@ -133,9 +133,9 @@ namespace Piriou
                     }
                     else if (dr["bookstock"] != DBNull.Value)
                     {
-                        upsql = "update dt29 set daCheck=1, bookstock=" + double.Parse(dr["bookstock"].ToString()).ToString("###########0.##") + ", slcan=" + double.Parse(dr["slcan"].ToString()).ToString("###########0.##");
+                        upsql= "update dt29 set daCheck=1, bookstock=" + double.Parse(dr["bookstock"].ToString()).ToString("###########0.##") + ", slcan=" + double.Parse(dr["slcan"].ToString()).ToString("###########0.##");
                     }
-                    if (dr["mavt1"] != DBNull.Value) upsql += ", mavt1='" + dr["mavt1"].ToString() + "'";
+                    if (dr["mavt1"] != DBNull.Value) upsql += ", mavt1='" + dr["mavt1"].ToString() + "'";                    
                     upsql += " where dt29id='" + dr["DT29ID"].ToString() + "'";
                     db.UpdateByNonQuery(upsql);
                     if (db.HasErrors)

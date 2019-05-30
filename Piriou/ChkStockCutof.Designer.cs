@@ -1,6 +1,6 @@
 ﻿namespace Piriou
 {
-    partial class ChkStock
+    partial class ChkStockCutof
     {
         /// <summary>
         /// Required designer variable.
@@ -392,7 +392,7 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 6;
             // 
-            // ChkStock
+            // ChkStockCutof
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -401,8 +401,8 @@
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "ChkStock";
-            this.Text = "ChkStock";
+            this.Name = "ChkStockCutof";
+            this.Text = "Cut-of Check";
             this.Load += new System.EventHandler(this.ChkStock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
