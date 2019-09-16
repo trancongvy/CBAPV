@@ -130,6 +130,18 @@
     <Compile Include="fKiemkedinhky.Designer.cs">
       <DependentUpon>fKiemkedinhky.cs</DependentUpon>
     </Compile>
+    <Compile Include="fTiendoThanhtoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTiendoThanhtoan.Designer.cs">
+      <DependentUpon>fTiendoThanhtoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fTiendoduan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTiendoduan.Designer.cs">
+      <DependentUpon>fTiendoduan.cs</DependentUpon>
+    </Compile>
     <Compile Include="GiaVT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +165,12 @@
     <EmbeddedResource Include="fKiemkedinhky.resx">
       <SubType>Designer</SubType>
       <DependentUpon>fKiemkedinhky.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTiendoThanhtoan.resx">
+      <DependentUpon>fTiendoThanhtoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTiendoduan.resx">
+      <DependentUpon>fTiendoduan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GiaVT.resx">
       <SubType>Designer</SubType>

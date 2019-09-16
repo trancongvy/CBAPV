@@ -61,9 +61,9 @@ namespace Banhang
             List<DataRow> ldr = (e.Data.GetData(typeof(List<DataRow>)) as List<DataRow>);
             foreach (DataRow dr in ldr)
             {
-                if (dr == null) continue;
+                if (dr == null || dr.RowState==DataRowState.Detached) continue;
                 DataRow dr1 = tb1.NewRow();
-                dr1.ItemArray = dr.ItemArray;
+                dr1.ItemArray = dr.ItemArray;   
                 tb1.Rows.Add(dr1);
                 tb.Rows.Remove(dr);
             }

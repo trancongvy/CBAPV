@@ -55,8 +55,16 @@ namespace Inventory
                 case 1005:
                     fBtKhuKho frm2 = new fBtKhuKho();
                     return frm2;
-                    //frm.Text = si.MenuName;
-                    //frm.ShowDialog();
+                //frm.Text = si.MenuName;
+                //frm.ShowDialog();
+                case 1006:
+                    fTiendoduan frm3 = new fTiendoduan();
+
+                    return frm3;
+                case 1007:
+                    fTiendoThanhtoan frm4= new fTiendoThanhtoan();
+
+                    return frm4;
             }
             return f;
         }

@@ -72,9 +72,18 @@ namespace QLSX
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             if (_apt.TuNgayKH < DateTime.Now) return;
-           // controller.ResourceId = _apt.ResourceId;
-           // controller.ApplyChanges();
-            this.DialogResult = DialogResult.OK;
+            // controller.ResourceId = _apt.ResourceId;
+            // controller.ApplyChanges();
+            if (MessageBox.Show("Bạn có muốn lưu không?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if ( _apt.Save())
+                {
+                    MessageBox.Show("Đã lưu thành công!");
+                    this.DialogResult = DialogResult.OK;
+                }
+            }
+            else
+                this.DialogResult = DialogResult.Cancel;
         }
     }
 }

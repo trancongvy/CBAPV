@@ -73,6 +73,7 @@ namespace Banhang
 
         private void dateEdit1_EditValueChanged(object sender, EventArgs e)
         {
+            if (dateEdit1.EditValue == null) return;
             ngayct = DateTime.Parse(dateEdit1.EditValue.ToString());
         }
 
@@ -111,7 +112,8 @@ namespace Banhang
                 object o = dbStrucst.GetValue("select dbo.AutoCreate('MT38',2)");
                 if (o != null) soct = o.ToString();
                 Guid task = Guid.NewGuid();
-                o = dbStrucst.GetValue("select dbo.GetTaskID('DT38',2)");
+                o = dbStrucst.GetValue("select dbo.GetTaskID('DT38',2)");//Dành cho Khải Hoàng
+               
                 if (o == null) o = task;
                 dbdata.BeginMultiTrans();
                 string sql = "insert into MT38 (mt38ID,MaCT, NGayCT,SoCT,Approved,Diengiai, TTien,PrintIndex,sysDBID,TaskID, MaXe,ChonDon, MaCN) values (";

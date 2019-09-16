@@ -31,9 +31,30 @@ namespace QLSX
 
             sResource.EditValueChanging += SResource_EditValueChanging;
             schedu.CustomDrawTimeCell += Schedu_CustomDrawTimeCell;
-            
+            this.FormClosing += FLichSX_FormClosing;
             
         }
+
+        private void FLichSX_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Changed)
+            {
+                if(MessageBox.Show("Bạn có muốn lưu những thay đổi không?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    bool result = true;
+                    foreach (LSXappoint apt in ctLichSXBind)
+                    {
+                        result = result && apt.Save();
+                    }
+                    if (result)
+                    {
+                        MessageBox.Show("Đã lưu thành công");
+                    }
+                }
+            }
+        }
+
+        bool Changed = false;
         Color lightColor;
         Color grayColor;
         Resource res = null;
@@ -294,12 +315,13 @@ namespace QLSX
                 (e.Object as Appointment).End = apt.End;
                 apt.UpdateDr();
                 //fAppoint fA = new fAppoint(schedu, apt, false);
-                
+
                 //if (fA.ShowDialog() == DialogResult.OK)
                 //{
                 //    (e.Object as Appointment).Start = apt.Start;
                 //    (e.Object as Appointment).End = apt.End;
                 //}
+                Changed = true;
             }
         
         }
@@ -308,7 +330,7 @@ namespace QLSX
 
         private void Schedu_AppointmentDrag(object sender, AppointmentDragEventArgs e)
         {
-           
+            Changed = true;
             // throw new NotImplementedException();
         }
 
@@ -369,12 +391,14 @@ namespace QLSX
 
         private void Schedu_AllowAppointmentCreate(object sender, AppointmentOperationEventArgs e)
         {
-           // e.Allow = false;
+            // e.Allow = false;
+            Changed = true;
         }
 
         private void Schedu_AllowAppointmentDelete(object sender, AppointmentOperationEventArgs e)
         {
             e.Allow = true;
+            Changed = true;
         }
 
         
@@ -464,6 +488,7 @@ namespace QLSX
         {try
             {
                 schedu.ActiveView.ResourcesPerPage = int.Parse(e.NewValue.ToString());
+
             }
             catch
             {
@@ -496,9 +521,14 @@ namespace QLSX
 
         private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            bool result = true;
             foreach(LSXappoint apt in ctLichSXBind)
             {
-                apt.Save();
+               result=result && apt.Save();
+            }
+            if (result)
+            {
+                MessageBox.Show("Đã lưu thành công");
             }
         }
 
