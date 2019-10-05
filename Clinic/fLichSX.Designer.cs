@@ -166,7 +166,7 @@ namespace QLSX
             this.repositoryItemCalcEdit1,
             this.repositoryItemMemoEdit1,
             this.repositoryItemMemoEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(1958, 135);
+            this.gridControl1.Size = new System.Drawing.Size(1958, 323);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -194,8 +194,9 @@ namespace QLSX
             this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsView.EnableAppearanceOddRow = true;
+            this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.RowHeight = 40;
+            this.gridView1.RowHeight = 22;
             // 
             // gridColumn16
             // 
@@ -218,7 +219,7 @@ namespace QLSX
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
-            this.gridColumn1.Width = 141;
+            this.gridColumn1.Width = 77;
             // 
             // gridColumn2
             // 
@@ -230,7 +231,7 @@ namespace QLSX
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 118;
+            this.gridColumn2.Width = 80;
             // 
             // gridColumn3
             // 
@@ -242,7 +243,7 @@ namespace QLSX
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 121;
+            this.gridColumn3.Width = 94;
             // 
             // gridColumn4
             // 
@@ -254,7 +255,7 @@ namespace QLSX
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
-            this.gridColumn4.Width = 128;
+            this.gridColumn4.Width = 81;
             // 
             // gridColumn5
             // 
@@ -264,7 +265,7 @@ namespace QLSX
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
-            this.gridColumn5.Width = 84;
+            this.gridColumn5.Width = 78;
             // 
             // gridColumn13
             // 
@@ -273,7 +274,7 @@ namespace QLSX
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 5;
-            this.gridColumn13.Width = 150;
+            this.gridColumn13.Width = 374;
             // 
             // gridColumn6
             // 
@@ -316,6 +317,7 @@ namespace QLSX
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.Width = 250;
             // 
             // repositoryItemMemoEdit2
             // 
@@ -329,6 +331,7 @@ namespace QLSX
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 11;
+            this.gridColumn8.Width = 298;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -360,7 +363,7 @@ namespace QLSX
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelControl2.Location = new System.Drawing.Point(1958, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(171, 135);
+            this.panelControl2.Size = new System.Drawing.Size(171, 323);
             this.panelControl2.TabIndex = 2;
             // 
             // simpleButton2
@@ -379,6 +382,11 @@ namespace QLSX
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit2.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
+            this.dateEdit2.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit2.Properties.EditFormat.FormatString = "dd/MM/yyyy";
+            this.dateEdit2.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit2.Properties.Mask.EditMask = "dd/MM/yyyy";
             this.dateEdit2.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.dateEdit2.Size = new System.Drawing.Size(87, 32);
@@ -418,6 +426,11 @@ namespace QLSX
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEdit1.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
+            this.dateEdit1.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit1.Properties.EditFormat.FormatString = "dd/MM/yyyy";
+            this.dateEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.dateEdit1.Properties.Mask.EditMask = "dd/MM/yyyy";
             this.dateEdit1.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.dateEdit1.Size = new System.Drawing.Size(87, 32);
@@ -438,7 +451,7 @@ namespace QLSX
             this.schedu.ActiveViewType = DevExpress.XtraScheduler.SchedulerViewType.Timeline;
             this.schedu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.schedu.GroupType = DevExpress.XtraScheduler.SchedulerGroupType.Resource;
-            this.schedu.Location = new System.Drawing.Point(0, 379);
+            this.schedu.Location = new System.Drawing.Point(0, 567);
             this.schedu.MenuManager = this.ribbonControl2;
             this.schedu.Name = "schedu";
             this.schedu.OptionsCustomization.AllowAppointmentCopy = DevExpress.XtraScheduler.UsedAppointmentType.None;
@@ -452,7 +465,7 @@ namespace QLSX
             this.schedu.OptionsView.ResourceHeaders.ImageInterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
             this.schedu.OptionsView.ResourceHeaders.ImageSize = new System.Drawing.Size(50, 50);
             this.schedu.OptionsView.ResourceHeaders.ImageSizeMode = DevExpress.XtraScheduler.HeaderImageSizeMode.ZoomImage;
-            this.schedu.Size = new System.Drawing.Size(2137, 719);
+            this.schedu.Size = new System.Drawing.Size(2137, 531);
             this.schedu.Start = new System.DateTime(2019, 1, 20, 0, 0, 0, 0);
             this.schedu.Storage = this.schedulerStorage1;
             this.schedu.TabIndex = 9;
@@ -549,6 +562,7 @@ namespace QLSX
             this.ribbonControl2.Size = new System.Drawing.Size(2129, 170);
             this.ribbonControl2.Toolbar.ShowCustomizeItem = false;
             this.ribbonControl2.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Above;
+            this.ribbonControl2.Click += new System.EventHandler(this.ribbonControl2_Click);
             // 
             // imageCollection1
             // 
@@ -894,8 +908,8 @@ namespace QLSX
             this.dockPanel1.ID = new System.Guid("b4749b2d-7987-4816-ad98-cd008d42ae5e");
             this.dockPanel1.Location = new System.Drawing.Point(0, 207);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 172);
-            this.dockPanel1.Size = new System.Drawing.Size(2137, 172);
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(200, 360);
+            this.dockPanel1.Size = new System.Drawing.Size(2137, 360);
             this.dockPanel1.Text = "Đơn hàng chưa lên lịch";
             // 
             // dockPanel1_Container
@@ -904,7 +918,7 @@ namespace QLSX
             this.dockPanel1_Container.Controls.Add(this.panelControl2);
             this.dockPanel1_Container.Location = new System.Drawing.Point(4, 33);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(2129, 135);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(2129, 323);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // dockPanel3_Container

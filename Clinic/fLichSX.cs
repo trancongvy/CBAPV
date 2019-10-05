@@ -243,7 +243,7 @@ namespace QLSX
             schedu.QueryWorkTime += Schedu_QueryWorkTime;
             //Resource
 
-            dmMayin = dbdata.GetDataTable("select * from dmMIn");
+            dmMayin = dbdata.GetDataTable("select * from dmMIn order by Sorted");
             dmMayin.TableName = "DmMIn";
             ds.Tables.Add(dmMayin);
             dmMInBindingSource.DataSource = ds;
@@ -575,6 +575,11 @@ namespace QLSX
         }
 
         private void bHeight_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void ribbonControl2_Click(object sender, EventArgs e)
         {
 
         }

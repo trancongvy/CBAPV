@@ -132,9 +132,9 @@ namespace Banhang
                     foreach (DataRow dr in lChon)
                     {
                         Guid DTID = Guid.NewGuid();
-                        sql = "insert into DT38 (MT38ID, DT38ID, mavt, SoLuong, MT35ID, DT35ID, MaKho, SlDat, SlDaGiao,  GhiChu, CT35ID, MaDVT) values ( @MT38ID, @DT38ID, @mavt, @SoLuong, @MT35ID, @DT35ID, @MaKho, @SlDat,@SlDaGiao,  @GhiChu, @CT35ID, @MaDVT)";
-                        dbdata.UpdateDatabyPara(sql, new string[] { "@MT38ID", "@DT38ID", "@mavt", "@SoLuong", "@MT35ID", "@DT35ID", "@MaKho", "@SlDat", "@SlDaGiao", "@GhiChu", "@CT35ID", "@MaDVT" },
-                            new object[] { ID, DTID, dr["MaVT"].ToString(), double.Parse(dr["SLGiao"].ToString()), dr["MT35ID"], dr["DT35ID"], dr["MaKho"].ToString(), double.Parse(dr["SLDat"].ToString()), double.Parse(dr["SLDaGiao"].ToString()), dr["Ghichuchitiet"].ToString(), dr["CT35ID"], dr["MaDVT"] });
+                        sql = "insert into DT38 (MT38ID, DT38ID,MaKH, mavt, SoLuong, MT35ID, DT35ID, MaKho, SlDat, SlDaGiao,  GhiChu, CT35ID, MaDVT) values ( @MT38ID, @DT38ID,@MaKH, @mavt, @SoLuong, @MT35ID, @DT35ID, @MaKho, @SlDat,@SlDaGiao,  @GhiChu, @CT35ID, @MaDVT)";
+                        dbdata.UpdateDatabyPara(sql, new string[] { "@MT38ID", "@DT38ID", "@MaKH", "@mavt", "@SoLuong", "@MT35ID", "@DT35ID", "@MaKho", "@SlDat", "@SlDaGiao", "@GhiChu", "@CT35ID", "@MaDVT" },
+                            new object[] { ID, DTID, dr["MaKH"].ToString(), dr["MaVT"].ToString(), double.Parse(dr["SLGiao"].ToString()), dr["MT35ID"], dr["DT35ID"], dr["MaKho"].ToString(), double.Parse(dr["SLDat"].ToString()), double.Parse(dr["SLDaGiao"].ToString()), dr["Ghichuchitiet"].ToString(), dr["CT35ID"], dr["MaDVT"] });
                         if (dbdata.HasErrors)
                         {
                             dbdata.RollbackMultiTrans();
