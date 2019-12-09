@@ -192,8 +192,8 @@ namespace QLSX
         private void getData(DateTime ngayct1, DateTime ngayct2)
         {
             //throw new NotImplementedException();
-            ctTangCa = dbdata.GetDataTable("select * from ctTangCa where ngay>='" + ngayct1.AddDays(-1).ToString() + "'")
-;            LSXChuaSapLich = dbdata.GetDataSetByStore("GetMTLSXchuaThuchien", new string[] { }, new object[] { });
+            ctTangCa = dbdata.GetDataTable("select * from ctTangCa where ngay>='" + ngayct1.AddDays(-1).ToString() + "'");
+            LSXChuaSapLich = dbdata.GetDataSetByStore("GetMTLSXchuaThuchien", new string[] { }, new object[] { });
             LSXChuaSapLich.TableName = "MTLSX";
             gridControl1.DataSource = LSXChuaSapLich;
             ctLichSX = dbdata.GetDataSetByStore("getLichSX", new string[] { "@Tungay", "@Denngay" }, new object[] { ngayct1, ngayct2 });
@@ -243,7 +243,7 @@ namespace QLSX
             schedu.QueryWorkTime += Schedu_QueryWorkTime;
             //Resource
 
-            dmMayin = dbdata.GetDataTable("select * from dmMIn");
+            dmMayin = dbdata.GetDataTable("select * from dmMIn  order by Sorted");
             dmMayin.TableName = "DmMIn";
             ds.Tables.Add(dmMayin);
             dmMInBindingSource.DataSource = ds;
@@ -351,14 +351,26 @@ namespace QLSX
                     fTca = new fTangca(new TimeInterval(e.Appointment.Start, e.Appointment.End), null);
                 }
                 fTca.ctTangca = this.ctTangCa.Clone();
+                DataRow drTangca = findTangca(schedu.SelectedInterval, schedu.SelectedResource);
+                
+                if (drTangca!=null)
+                {
+                    DataRow dr = fTca.ctTangca.NewRow();
+                    dr.ItemArray = (object[])drTangca.ItemArray.Clone();
+                    fTca.ctTangca.Rows.Add(dr);
+                }
                 fTca.dmMIn = dmMayin;
+
                 if (fTca.ShowDialog() == DialogResult.OK)
                 {
                     if (fTca.ctTangca.Rows.Count > 0)
                     {
-                        DataRow dr = ctTangCa.NewRow();
-                        dr.ItemArray = (object[])fTca.ctTangca.Rows[0].ItemArray.Clone();
-                        ctTangCa.Rows.Add(dr);
+                        if (drTangca == null)
+                        {
+                            DataRow dr = this.ctTangCa.NewRow();
+                            dr.ItemArray = (object[])fTca.ctTangca.Rows[0].ItemArray.Clone();
+                            ctTangCa.Rows.Add(dr);
+                        }
                         ctTangCa.AcceptChanges();
                         //Tính lại DenNgayKH 
                         foreach(LSXappoint apt1 in x)
@@ -387,6 +399,35 @@ namespace QLSX
                 }
 
             } 
+        }
+
+        private DataRow findTangca(TimeInterval selectedInterval, Resource selectedResource)
+        {
+            DateTime bLunch = DateTime.Parse(selectedInterval.Start.ToShortDateString() + " " + Config.GetValue("TimeStartLunch").ToString() + ":00");
+            DateTime eLunch = DateTime.Parse(selectedInterval.Start.ToShortDateString() + " " + Config.GetValue("TimeEndLunch").ToString() + ":00");
+            DateTime bWork = DateTime.Parse(selectedInterval.Start.ToShortDateString() + " " + Config.GetValue("TimeStart").ToString() + ":00");
+            DateTime eWork = DateTime.Parse(selectedInterval.Start.ToShortDateString() + " " + Config.GetValue("TimeEnd").ToString() + ":00");
+            DataRow[] ldr = ctTangCa.Select("MaMin='" + selectedResource.Id.ToString() + "' and Ngay='" + selectedInterval.Start.ToShortDateString() + "'");
+            if (ldr.Length == 0)
+                return null;
+            else
+            {
+                DateTime date = DateTime.Parse(selectedInterval.Start.ToShortDateString());
+                foreach(DataRow dr in ldr)
+                {
+                    if(bool.Parse(dr["isLunch"].ToString()) )
+                    {
+                        if (selectedInterval.Start == bLunch) return dr;
+                        if (selectedInterval.Start > bLunch && selectedInterval.Start < eLunch) return dr;
+                    }
+                    if(bool.Parse(dr["isNight"].ToString()))
+                    {
+                        if (selectedInterval.Start == eWork) return dr;
+                        if (selectedInterval.Start > eWork && selectedInterval.Start < bWork.AddDays(1)) return dr;
+                    }
+                }
+                return null;
+            }
         }
 
         private void Schedu_AllowAppointmentCreate(object sender, AppointmentOperationEventArgs e)
@@ -426,7 +467,7 @@ namespace QLSX
             dr["TenKH"] = drLSX["TenKH"];
             dr["MaVT"] = drLSX["MaVT"];
             dr["TenHang"] = drLSX["TenHang"];
-            dr["SoLuong"] = drLSX["SoLuongTP"];
+            dr["SoLuong"] = drLSX["SoLuong"];
             dr["TrangThai"] = 0;
             dr["SLDaNhap"] = 0;
             if (schedu.SelectedInterval == null)
@@ -575,6 +616,11 @@ namespace QLSX
         }
 
         private void bHeight_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void schedu_Click(object sender, EventArgs e)
         {
 
         }

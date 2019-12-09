@@ -48,7 +48,9 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -60,8 +62,6 @@
             this.repositoryItemCalcEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCalcEdit();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dNgay.Properties.VistaTimeProperties)).BeginInit();
@@ -89,7 +89,7 @@
             this.panelControl1.Controls.Add(this.labelControl2);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(2740, 85);
             this.panelControl1.TabIndex = 0;
@@ -98,7 +98,7 @@
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(24, 21);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(47, 25);
             this.labelControl1.TabIndex = 10;
@@ -109,7 +109,7 @@
             this.dNgay.EditValue = null;
             this.dNgay.EnterMoveNextControl = true;
             this.dNgay.Location = new System.Drawing.Point(144, 15);
-            this.dNgay.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dNgay.Margin = new System.Windows.Forms.Padding(6);
             this.dNgay.Name = "dNgay";
             this.dNgay.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.dNgay.Properties.Appearance.Options.UseBackColor = true;
@@ -123,7 +123,7 @@
             // labelControl3
             // 
             this.labelControl3.Location = new System.Drawing.Point(1664, 29);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(101, 25);
             this.labelControl3.TabIndex = 8;
@@ -134,7 +134,7 @@
             this.dNgaynhap.EditValue = null;
             this.dNgaynhap.EnterMoveNextControl = true;
             this.dNgaynhap.Location = new System.Drawing.Point(1784, 23);
-            this.dNgaynhap.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dNgaynhap.Margin = new System.Windows.Forms.Padding(6);
             this.dNgaynhap.Name = "dNgaynhap";
             this.dNgaynhap.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.dNgaynhap.Properties.Appearance.Options.UseBackColor = true;
@@ -149,7 +149,7 @@
             // 
             this.gridLookUpEdit2.EditValue = "";
             this.gridLookUpEdit2.Location = new System.Drawing.Point(468, 15);
-            this.gridLookUpEdit2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridLookUpEdit2.Margin = new System.Windows.Forms.Padding(6);
             this.gridLookUpEdit2.Name = "gridLookUpEdit2";
             this.gridLookUpEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -181,7 +181,7 @@
             // simpleButton2
             // 
             this.simpleButton2.Location = new System.Drawing.Point(854, 10);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(196, 44);
             this.simpleButton2.TabIndex = 5;
@@ -191,7 +191,7 @@
             // simpleButton1
             // 
             this.simpleButton1.Location = new System.Drawing.Point(2058, 23);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(196, 44);
             this.simpleButton1.TabIndex = 4;
@@ -201,7 +201,7 @@
             // labelControl2
             // 
             this.labelControl2.Location = new System.Drawing.Point(372, 25);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(37, 25);
             this.labelControl2.TabIndex = 3;
@@ -210,10 +210,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(0, 85);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1,
@@ -260,7 +260,7 @@
             this.gridColumn16.FieldName = "DangChay";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 14;
+            this.gridColumn16.VisibleIndex = 7;
             this.gridColumn16.Width = 67;
             // 
             // repositoryItemCheckEdit1
@@ -285,8 +285,6 @@
             this.gridColumn2.FieldName = "NgayCT";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
             this.gridColumn2.Width = 178;
             // 
             // gridColumn3
@@ -298,7 +296,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 11;
             this.gridColumn3.Width = 137;
             // 
             // gridColumn15
@@ -310,7 +308,7 @@
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.OptionsColumn.AllowEdit = false;
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 4;
+            this.gridColumn15.VisibleIndex = 12;
             this.gridColumn15.Width = 121;
             // 
             // gridColumn4
@@ -322,8 +320,17 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.VisibleIndex = 13;
             this.gridColumn4.Width = 138;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "Số ĐH";
+            this.gridColumn17.FieldName = "SoDH";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 10;
+            this.gridColumn17.Width = 81;
             // 
             // gridColumn5
             // 
@@ -332,8 +339,17 @@
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 6;
+            this.gridColumn5.VisibleIndex = 14;
             this.gridColumn5.Width = 119;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "Tên KH";
+            this.gridColumn18.FieldName = "TenKH";
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 1;
+            this.gridColumn18.Width = 358;
             // 
             // gridColumn6
             // 
@@ -344,7 +360,7 @@
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
+            this.gridColumn6.VisibleIndex = 15;
             this.gridColumn6.Width = 94;
             // 
             // gridColumn7
@@ -354,8 +370,8 @@
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.OptionsColumn.AllowEdit = false;
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 9;
-            this.gridColumn7.Width = 179;
+            this.gridColumn7.VisibleIndex = 2;
+            this.gridColumn7.Width = 277;
             // 
             // gridColumn8
             // 
@@ -364,8 +380,8 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.OptionsColumn.AllowEdit = false;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 10;
-            this.gridColumn8.Width = 144;
+            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.Width = 114;
             // 
             // gridColumn9
             // 
@@ -374,7 +390,7 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.OptionsColumn.AllowEdit = false;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 11;
+            this.gridColumn9.VisibleIndex = 4;
             this.gridColumn9.Width = 130;
             // 
             // gridColumn10
@@ -386,7 +402,7 @@
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.OptionsColumn.AllowEdit = false;
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 12;
+            this.gridColumn10.VisibleIndex = 5;
             // 
             // gridColumn11
             // 
@@ -406,7 +422,7 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 13;
+            this.gridColumn12.VisibleIndex = 6;
             this.gridColumn12.Width = 116;
             // 
             // gridColumn13
@@ -418,7 +434,7 @@
             this.gridColumn13.FieldName = "SLTPNhap";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 16;
+            this.gridColumn13.VisibleIndex = 9;
             // 
             // repositoryItemCalcEdit1
             // 
@@ -434,33 +450,17 @@
             this.gridColumn14.FieldName = "HoanThanh";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 15;
+            this.gridColumn14.VisibleIndex = 8;
+            this.gridColumn14.Width = 90;
             // 
             // panelControl2
             // 
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl2.Location = new System.Drawing.Point(0, 912);
-            this.panelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(6);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(2740, 94);
             this.panelControl2.TabIndex = 4;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "Số ĐH";
-            this.gridColumn17.FieldName = "SoDH";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 2;
-            // 
-            // gridColumn18
-            // 
-            this.gridColumn18.Caption = "Tên KH";
-            this.gridColumn18.FieldName = "TenKH";
-            this.gridColumn18.Name = "gridColumn18";
-            this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 7;
-            this.gridColumn18.Width = 358;
             // 
             // fNhapTP
             // 
@@ -470,7 +470,7 @@
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "fNhapTP";
             this.Text = "fDieuXe";
             this.Load += new System.EventHandler(this.fDieuXe_Load);

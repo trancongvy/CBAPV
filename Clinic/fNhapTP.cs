@@ -124,7 +124,7 @@ namespace QLSX
         private void GetMaXe()
         {
             
-            string sql = "select * from dmmin ";
+            string sql = "select * from dmmin   order by Sorted";
             dmMIn = dbdata.GetDataTable(sql);
 
             if (dmMIn != null)

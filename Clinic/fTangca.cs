@@ -89,6 +89,14 @@ namespace QLSX
                 ctTangca.Rows.Add(Dr);
                 Dr.EndEdit();
             }
+            else
+            {
+                ckLunch.Properties.ReadOnly = true;
+                ckNight.Properties.ReadOnly = true;
+                gMaMin.Properties.ReadOnly = true;
+                dNgay.Properties.ReadOnly = true;
+                Dr = ctTangca.Rows[0];
+            }
            
         }
 
@@ -103,18 +111,27 @@ namespace QLSX
                 object c = db.GetValue(sql);
                 if (c == null)
                 { db.EndMultiTrans(); return; }
-                if (int.Parse(c.ToString()) > 0) { db.EndMultiTrans(); return; }
-                sql = "insert into ctTangca (ctTangcaID,Ngay,Sogio, isLunch, isNight, MaMIn) values (@ctTangcaID, @Ngay,@SoGio, @isLunch, @isNight,@MaMIn)";
-
-                db.UpdateDatabyPara(sql, new string[] { "@ctTangcaID", "@Ngay", "@SoGio", "@isLunch", "@isNight", "@MaMIn" }, new object[] { Dr["ctTangcaID"], Dr["Ngay"], Dr["SoGio"], Dr["isLunch"], Dr["isNight"], Dr["MaMIn"] });
-                if (db.HasErrors)
+                if (int.Parse(c.ToString()) > 0)
                 {
-                    db.RollbackMultiTrans();
-                    return;
+                    sql = "update ctTangca set SoGio=@SoGio where ctTangCaID=@ctTangcaID";
+                    db.UpdateDatabyPara(sql, new string[] { "@ctTangcaID", "@SoGio" }, new object[] { Dr["ctTangcaID"], Dr["SoGio"] });
+                    db.EndMultiTrans();
+
                 }
                 else
                 {
-                    db.EndMultiTrans();
+                    sql = "insert into ctTangca (ctTangcaID,Ngay,Sogio, isLunch, isNight, MaMIn) values (@ctTangcaID, @Ngay,@SoGio, @isLunch, @isNight,@MaMIn)";
+
+                    db.UpdateDatabyPara(sql, new string[] { "@ctTangcaID", "@Ngay", "@SoGio", "@isLunch", "@isNight", "@MaMIn" }, new object[] { Dr["ctTangcaID"], Dr["Ngay"], Dr["SoGio"], Dr["isLunch"], Dr["isNight"], Dr["MaMIn"] });
+                    if (db.HasErrors)
+                    {
+                        db.RollbackMultiTrans();
+                        return;
+                    }
+                    else
+                    {
+                        db.EndMultiTrans();
+                    }
                 }
             } catch(Exception ex) { db.RollbackMultiTrans(); }
             this.DialogResult = DialogResult.OK;

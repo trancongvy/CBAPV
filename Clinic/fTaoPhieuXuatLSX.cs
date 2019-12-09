@@ -26,7 +26,16 @@ namespace QLSX
         public fTaoPhieuXuatLSX()
         {
             InitializeComponent();
+            string sql = "select * from dmmin ";
+            dmMIn = db.GetDataTable(sql);
+
+            if (dmMIn != null)
+            {
+                gridLookUpEdit2.Properties.DataSource = dmMIn;
+                if (dmMIn.Rows.Count > 0) gridLookUpEdit2.EditValue = dmMIn.Rows[0]["MaMIn"].ToString();
+            }
         }
+        DataTable dmMIn;
         Database db = Database.NewDataDatabase();
         Database dbStruct = Database.NewStructDatabase();
         DataTable tb;
@@ -42,10 +51,11 @@ namespace QLSX
         DataTable tbResult;
         BindingSource _bindingSource = new BindingSource();
         DataSet ds = new DataSet();
+        string MayIn = "";
         private void fViewSumRFM_Load(object sender, EventArgs e)
         {
 
-            ds = db.GetDataSetByStore1("GetMTLSX4NVL", new string[] { }, new object[] { });
+            ds = db.GetDataSetByStore1("GetMTLSX4NVL", new string[] { "@MayIn" }, new object[] { MayIn });
             if (ds == null) return;
             if (ds.Tables.Count != 3) return;
             tb = ds.Tables[0];
@@ -78,20 +88,22 @@ namespace QLSX
 
         private void RepositoryItemCheckEdit1_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
         {
-
-            if (bool.Parse(e.NewValue.ToString()))
-             {
-                DataRow dr = gridView1.GetDataRow(gridView1.GetSelectedRows()[0]);
-                dr["Chon"] = true;
-                dr.EndEdit();
-                getdata();
-            }
-            else
+            if (gridView1.GetSelectedRows().Length != 0)
             {
-                DataRow dr = gridView1.GetDataRow(gridView1.GetSelectedRows()[0]);
-                dr["Chon"] = false;
-                dr.EndEdit();
-                getdata();
+                if (bool.Parse(e.NewValue.ToString()))
+                {
+                    DataRow dr = gridView1.GetDataRow(gridView1.GetSelectedRows()[0]);
+                    dr["Chon"] = true;
+                    dr.EndEdit();
+                    getdata();
+                }
+                else
+                {
+                    DataRow dr = gridView1.GetDataRow(gridView1.GetSelectedRows()[0]);
+                    dr["Chon"] = false;
+                    dr.EndEdit();
+                    getdata();
+                }
             }
 
 
@@ -194,6 +206,12 @@ namespace QLSX
         private void gridControl3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void gridLookUpEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+            MayIn = gridLookUpEdit2.EditValue.ToString();
+            
         }
     }
 }
