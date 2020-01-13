@@ -145,55 +145,78 @@ namespace QLSX
             string soct = "";
             try
             {
-                Guid ID = Guid.NewGuid();
-                DataRow[] ldr = DTLSX.Select("SLTPNhap>0");
-                if (ldr.Length == 0) return true;
-                object o = dbStrucst.GetValue("select dbo.AutoCreate('MT41',2)");
-                if (o != null) soct = o.ToString();
+
+
+
+                object o;
                 Guid task = Guid.NewGuid();
                 o = dbStrucst.GetValue("select dbo.GetBTid('DT41')");
                 if (o == null) o = task;
+                DataRow[] ldrMT = DTLSX.Select("SLTPNhap>0");
+                List<string> ldrMTtmp = new List<string>();
                 dbdata.BeginMultiTrans();
-                sql = "insert into MT41 (mt41ID,MaCT, NGayCT,SoCT,Approved,Diengiai,MaNT, Tygia, TTienNT, TTien,PrintIndex,sysDBID,TaskID,  MaCN) values (";
-                sql += "@mt41ID,@MaCT, @NGayCT,@SoCT,@Approved,@Diengiai,@MaNT, @Tygia, @TTienNT, @TTien,@PrintIndex,@sysDBID,@TaskID, @MaCN)";
-                dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@MaCT", "@NGayCT", "@SoCT", "@Approved", "@Diengiai", "@MaNT", "@Tygia", "@TTienNT", "@TTien", "@PrintIndex", "@sysDBID", "@TaskID", "@MaCN" },
-                    new object[] { ID, "NSX", ngayct, soct, 0, "Nhập kho thành phẩm", "VND", 1, 0, 0, 0, 2, o, macn });
-                if (dbdata.HasErrors)
+                foreach (DataRow  drMt in ldrMT)
                 {
-                    dbdata.RollbackMultiTrans();
-                    dbdata.HasErrors = false;
-                    MessageBox.Show("Lỗi");
-                    return false;
-                }
-                foreach (DataRow dr in ldr)
-                {
-                    sql = "insert into DT41 (mt41ID,DT41ID, MaVT, Soluong, Gia, GiaNT,Ps, PsNT,MTLSXID, DTLSXID,CtLichSXID,MaMin, MaDVT, tkco, tkno) select ";
-                    sql += "@mt41ID,@DT41ID, @MaVT, @Soluong, @Gia, @GiaNT,@Ps, @PsNT,@MTLSXID, @DTLSXID,@CtLichSXID,@MaMin, MaDVT, TkKho, TkGV from dmvt where mavt=@MaVT ";
-                    dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@DT41ID", "@MaVT", "@Soluong", "@Gia", "@GiaNT", "@Ps", "@PsNT", "@MTLSXID", "@DTLSXID", "@CtLichSXID", "@MaMin" },
-                        new object[] { ID, Guid.NewGuid(), dr["MaVT"].ToString(), double.Parse(dr["SLTPNhap"].ToString()), 0, 0, 0, 0, Guid.Parse(dr["MTLSXID"].ToString()), Guid.Parse(dr["DTLSXID"].ToString()), Guid.Parse(dr["CtLichSXID"].ToString()), dr["MaMin"].ToString() });
-                    sql = "update dtLSX set SLTPNK=SLTPNK+" + dr["SLTPNhap"].ToString() + " where DTLSXID='" + dr["DTLSXID"].ToString() + "'";
-                    dbdata.UpdateByNonQuery(sql);
-                    sql = "update ctLichSX set SLDaNhap=SLDaNhap+" + dr["SLTPNhap"].ToString() + " where ctLichSXID='" + dr["ctLichSXID"].ToString() + "'";
-                    dbdata.UpdateByNonQuery(sql);
-                    if (dbdata.HasErrors)
+                    if(!ldrMTtmp.Contains(drMt["MTLSXID"].ToString()))//Chưa tạo phiếu xuất
                     {
-                        dbdata.RollbackMultiTrans();
-                        dbdata.HasErrors = false;
-                        MessageBox.Show("Lỗi");
-                        return false;
+                       object so = dbStrucst.GetValue("select dbo.AutoCreate('MT41',2)");
+                        if (so != null) soct = so.ToString();
+                        Guid ID = Guid.NewGuid();
+                        DataRow[] ldr = DTLSX.Select("SLTPNhap>0 and MTLSXID='" + drMt["MTLSXID"].ToString() +"'");
+                        if(ldr.Length == 0) continue ;
+                        sql = "insert into MT41 (mt41ID,MaCT, NGayCT,SoCT,MaKH,Approved,Diengiai,MaNT, Tygia, TTienNT, TTien,PrintIndex,sysDBID,TaskID,  MaCN, MTLSXID,BPTP) values (";
+                        sql += "@mt41ID,@MaCT, @NGayCT,@SoCT,@MaKH,@Approved,@Diengiai,@MaNT, @Tygia, @TTienNT, @TTien,@PrintIndex,@sysDBID,@TaskID, @MaCN, @MTLSXID,@BPTP)";
+                        dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@MaCT", "@NGayCT", "@SoCT", "@MaKH", "@Approved", "@Diengiai", "@MaNT", "@Tygia", "@TTienNT", "@TTien", "@PrintIndex", "@sysDBID", "@TaskID", "@MaCN", "@MTLSXID", "@BPTP" },
+                            new object[] { ID, "NSX", ngayct, soct,"CONGTY", 0, "Nhập kho thành phẩm", "VND", 1, 0, 0, 0, 2, o, macn, Guid.Parse(drMt["MTLSXID"].ToString()), drMt["BPTP"] });
+                        if (dbdata.HasErrors)
+                        {
+                            dbdata.RollbackMultiTrans();
+                            dbdata.HasErrors = false;
+                            MessageBox.Show("Lỗi");
+                            return false;
+                        }
+                        foreach (DataRow dr in ldr)
+                        {
+                            double SLTDHang = double.Parse(dr["SLTPNhap"].ToString());
+                            double heso = double.Parse(dr["heso"].ToString());
+                            double soluong = Math.Round(SLTDHang / heso, 1);
+                            sql = "insert into DT41 (mt41ID,DT41ID,MaKho, MaLo, MaVT,SLTDHang, Soluong, Gia, GiaNT,Ps, PsNT,MTLSXID, DTLSXID,CtLichSXID,MaMin, MaDVT, tkco, tkno) select ";
+                            sql += "@mt41ID,@DT41ID,@MaKho, @MaLo, @MaVT,@SLTDHang, @Soluong, @Gia, @GiaNT,@Ps, @PsNT,@MTLSXID, @DTLSXID,@CtLichSXID,@MaMin, MaDVT, TkKho, TkGV from dmvt where mavt=@MaVT ";
+                            dbdata.UpdateDatabyPara(sql, new string[] { "@mt41ID", "@DT41ID", "@MaKho", "@MaLo", "@MaVT","@SLTDHang", "@Soluong", "@Gia", "@GiaNT", "@Ps", "@PsNT", "@MTLSXID", "@DTLSXID", "@CtLichSXID", "@MaMin" },
+                                new object[] { ID, Guid.NewGuid(),"KTP01","THANHPHAM", dr["MaVT"].ToString(),SLTDHang, soluong, 0, 0, 0, 0, Guid.Parse(dr["MTLSXID"].ToString()), Guid.Parse(dr["DTLSXID"].ToString()), Guid.Parse(dr["CtLichSXID"].ToString()), dr["MaMin"].ToString() });
+                            sql = "update dtLSX set SLTPNK=SLTPNK+" + SLTDHang.ToString() + " where DTLSXID='" + dr["DTLSXID"].ToString() + "'";
+                            dbdata.UpdateByNonQuery(sql);
+                            sql = "update ctLichSX set SLDaNhap=SLDaNhap+" + SLTDHang.ToString() + " where ctLichSXID='" + dr["ctLichSXID"].ToString() + "'";
+                            dbdata.UpdateByNonQuery(sql);
+                            if (dbdata.HasErrors)
+                            {
+                                dbdata.RollbackMultiTrans();
+                                dbdata.HasErrors = false;
+                                MessageBox.Show("Lỗi");
+                                return false;
+                            }
+                        }
+                        ldrMTtmp.Add(drMt["MTLSXID"].ToString());
+                        dbStrucst.UpdateDatabyStore("UpdateSoct", new string[] { "@tableName", "@sysDBID", "@SoCT", "@MaCN" }, new object[] { "MT41", 2, soct, null });
+
                     }
+                    else
+                    {
+                        continue;
+                    }
+                    
                 }
                 if (!dbdata.HasErrors)
                 {
-                    foreach (DataRow dr in ldr)
+
+                    foreach (DataRow dr in ldrMT)
                     {
                         dr["SlDaNhap"] = double.Parse(dr["SlDaNhap"].ToString()) + double.Parse(dr["SLTPNhap"].ToString());
                         dr["SLTPNhap"] = 0;
                         dr.EndEdit();
                     }
-                        dbdata.EndMultiTrans();
-                    dbStrucst.UpdateDatabyStore("UpdateSoct", new string[] { "@tableName", "@sysDBID", "@SoCT", "@MaCN" }, new object[] { "MT41", 2, soct, null });
-                    MessageBox.Show("Đã tạo phiếu nhập thành phẩm");
+                    dbdata.EndMultiTrans();
+                                        MessageBox.Show("Đã tạo phiếu nhập thành phẩm");
                     return true;
                 }
                 else
@@ -203,6 +226,7 @@ namespace QLSX
                     MessageBox.Show("Lỗi");
                     return false;
                 }
+                
             }
             catch (Exception ex) { return false; }
             finally

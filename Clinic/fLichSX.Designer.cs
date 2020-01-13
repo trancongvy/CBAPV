@@ -30,6 +30,7 @@ namespace QLSX
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraScheduler.TimeRuler timeRuler1 = new DevExpress.XtraScheduler.TimeRuler();
             DevExpress.XtraScheduler.TimeScaleYear timeScaleYear1 = new DevExpress.XtraScheduler.TimeScaleYear();
             DevExpress.XtraScheduler.TimeScaleQuarter timeScaleQuarter1 = new DevExpress.XtraScheduler.TimeScaleQuarter();
@@ -69,7 +70,7 @@ namespace QLSX
             this.dateNavigator1 = new DevExpress.XtraScheduler.DateNavigator();
             this.schedu = new DevExpress.XtraScheduler.SchedulerControl();
             this.ribbonControl2 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.imageCollection1 = new DevExpress.Utils.ImageCollection();
+            this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
@@ -97,11 +98,11 @@ namespace QLSX
             this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemDuration1 = new DevExpress.XtraScheduler.UI.RepositoryItemDuration();
             this.repositoryItemTimeEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
-            this.schedulerStorage1 = new DevExpress.XtraScheduler.SchedulerStorage();
-            this.ctLichSXBindingSource = new System.Windows.Forms.BindingSource();
-            this.dmMInBindingSource = new System.Windows.Forms.BindingSource();
-            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager();
-            this.dockManager2 = new DevExpress.XtraBars.Docking.DockManager();
+            this.schedulerStorage1 = new DevExpress.XtraScheduler.SchedulerStorage(this.components);
+            this.ctLichSXBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dmMInBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
+            this.dockManager2 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.hideContainerRight = new DevExpress.XtraBars.Docking.AutoHideContainer();
             this.dockPanel2 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel2_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -111,7 +112,7 @@ namespace QLSX
             this.controlContainer2 = new DevExpress.XtraBars.Docking.ControlContainer();
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
-            this.lSXappointBindingSource = new System.Windows.Forms.BindingSource();
+            this.lSXappointBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dockPanel3_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.controlContainer1 = new DevExpress.XtraBars.Docking.ControlContainer();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();

@@ -170,11 +170,20 @@ namespace QLSX
             if (con == string.Empty) con = "";
             else
                 con = con.Substring(0, con.Length - 1);
+            db.BeginMultiTrans();
             if (db.UpdateDatabyStore("CreatePhieuXuatfromLSX", new string[] { "@con" }, new object[] { con}))
             {
+                db.EndMultiTrans();
                 MessageBox.Show("Tạo Yêu cầu xuất kho đã hoàn thành!");
-               // tb = db.GetDataSetByStore("GetMTLSX", new string[] { }, new object[] { });
+                // tb = db.GetDataSetByStore("GetMTLSX", new string[] { }, new object[] { });
+                
                 fViewSumRFM_Load(this, new EventArgs());
+                
+            }
+            else
+            {
+                db.RollbackMultiTrans();
+                MessageBox.Show("Tạo Yêu cầu xuất kho không hoàn thành!");
             }
         }
         private void SetVariables(DevExpress.XtraReports.UI.XtraReport rptTmp)
